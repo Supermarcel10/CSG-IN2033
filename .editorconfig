@@ -1,0 +1,14 @@
+# EditorConfig is awesome: https://EditorConfig.org
+
+# Top-most EditorConfig file
+root = true
+
+# Unix-style newlines with a newline at the end
+[*]
+end_of_line = lf
+insert_final_newline = true
+
+# Set tab width to tab
+[*.java]
+indent_style = tab
+indent_size = 4
