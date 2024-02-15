@@ -14,6 +14,7 @@ import java.util.ArrayList;
  * @version 1.0
  * @since 1.0
  */
+@SuppressWarnings("unused")
 public interface IFrontOfHouse {
 	/**
 	 * Returns the current menu in rotation.
