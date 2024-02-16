@@ -84,6 +84,7 @@ public interface IFrontOfHouse {
 		private final ArrayList<Dish> dishes;
 		/**
 		 * The next time the menu will be updated.
+		 * @see ZonedDateTime
 		 */
 		private final ZonedDateTime nextMenuUpdate;
 
@@ -92,6 +93,7 @@ public interface IFrontOfHouse {
 		 *
 		 * @param dishes The list of dishes in the menu.
 		 * @param nextMenuUpdate The next time the menu will be updated.
+		 * @see ZonedDateTime
 		 * <hr/>
 		 * {@code @example}
 		 * <pre>
