@@ -1,4 +1,4 @@
-package uk.ac.city.supermarcel10;
+package uk.ac.city;
 
 
 public class Main {

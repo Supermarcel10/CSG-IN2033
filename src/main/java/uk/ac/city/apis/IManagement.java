@@ -1,12 +1,13 @@
-package uk.ac.city.supermarcel10.apis;
+package uk.ac.city.apis;
 
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 
 /**
- * The IFrontOfHouse interface is intended to be implemented by the front of house developers.
- * This interface provides the methods to retrieve the current menu items, and to check if a dish is available.
+ * The IManagement interface is intended to be implemented by the management developers.
+ * This interface provides the methods to retrieve the menu and stock.
  *
  * @author Marcel
  * @see ZonedDateTime
@@ -15,63 +16,33 @@ import java.util.ArrayList;
  * @since 1.0
  */
 @SuppressWarnings("unused")
-public interface IFrontOfHouse {
+public interface IManagement {
 	/**
-	 * Returns the current menu in rotation.
-	 * It is recommended to run this method once and store the result, rather than calling it multiple times.
-	 * This method can be run during startup, and every time the menu is updated.
-	 *
-	 * @return An ArrayList of Dish objects representing the menu.
-	 * <hr/>
-	 * {@code @example}
-	 * <pre>
-	 *     // Assume an implementation of dishService
-	 *     ArrayList&lt;Dish&gt; menu = dishService.getMenu();
-	 *     boolean isPizzaAvailable = menu.stream().map(Dish::isAvailable).filter(name -> name.contains("Pizza")).findFirst().orElse(false);
-	 *     System.out.println("Is a delicious pizza available? " + isPizzaAvailable);
-	 * </pre>
+	 * Return the quantity of all items in stock.
+	 * @return HashMap of all items, as well as their corresponding stock quantity.
+	 */
+	HashMap<String, Integer> getStock();
+
+	/**
+	 * Returns the quantity in stock of the specified item.
+	 * @param itemName The name of the item to check the stock of.
+	 * @return The stock of the item. Null if the item does not exist in stock.
+	 */
+	Integer getStock(String itemName);
+
+	/**
+	 * Gets the current menu.
+	 * @return The current menu.
 	 */
 	Menu getMenu();
 
 	/**
-	 * Returns if the dish with the specified dishID is available for ordering.
-	 * This method can be run when an order is placed or on every login, to check if the dish is still available.
-	 *
-	 * @param dishID The ID of the dish to retrieve.
-	 * @return True if the dish is available, false if it is not.
-	 * <hr/>
-	 * {@code @example}
-	 * <pre>
-	 *    // Assume an implementation of dishService
-	 *    int pizzaDishID = 123;
-	 *    if (dishService.isDishAvailable(pizzaDishID)) {
-	 *        System.out.println("Pizza is available! Proceed with ordering.");
-	 *    } else {
-	 *        System.out.println("Pizza is unfortunately out of stock. Mark it as unavailable.");
-	 *    }
-	 * </pre>
+	 * Gets the menu for the specified date &amp; time.
+	 * @param dateTime The date &amp; time to get the menu for.
+	 * @return The menu active during the specified date &amp; time. Null if no menu exists.
+	 * @see ZonedDateTime
 	 */
-	boolean isDishAvailable(int dishID);
-
-	/**
-	 * Returns if the dish is available for ordering.
-	 * This method can be run when an order is placed or on every login, to check if the dish is still available.
-	 *
-	 * @param dish The dish to retrieve.
-	 * @return True if the dish is available, false if it is not.
-	 * <hr/>
-	 * {@code @example}
-	 * <pre>
-	 *    // Assume an implementation of dishService
-	 *    Dish pizzaDish = new Dish(123, 1000, "Pizza", "A delicious pizza", new ArrayList&lt;String&gt;(), new ArrayList&lt;String&gt;(), true);
-	 *    if (dishService.isDishAvailable(pizzaDish)) {
-	 *        System.out.println("Pizza is available! Proceed with ordering.");
-	 *    } else {
-	 *        System.out.println("Pizza is unfortunately out of stock. Mark it as unavailable.");
-	 *    }
-	 * </pre>
-	 */
-	boolean isDishAvailable(Dish dish);
+	Menu getMenu(ZonedDateTime dateTime);
 
 	/**
 	 * Represents a menu, containing a list of dishes and the next time the menu will be updated.
