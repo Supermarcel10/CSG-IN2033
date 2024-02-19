@@ -14,6 +14,22 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.3.0</version> <configuration>
+                <archive>
+                    <manifest>
+                        <mainClass>uk.ac.city.Main</mainClass>
+                    </manifest>
+                </archive>
+            </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
     <dependencies>
         <!--JUnit Tests-->
         <!--https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api/5.10.1-->
