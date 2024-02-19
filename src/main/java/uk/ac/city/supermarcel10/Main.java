@@ -1,4 +1,4 @@
-package com.github.supermarcel10;
+package uk.ac.city.supermarcel10;
 
 
 public class Main {
