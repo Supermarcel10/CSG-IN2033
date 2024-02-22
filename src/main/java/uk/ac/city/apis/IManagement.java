@@ -88,7 +88,7 @@ public interface IManagement {
 
 		/**
 		 * Returns the list of dishes in the menu.
-		 * @see ArrayList The ArrayList class is used to create a dynamic array that contains a list of elements.
+		 * @see ArrayList
 		 * @return The list of dishes in the menu.
 		 * <hr/>
 		 * {@code @example}
@@ -140,11 +140,11 @@ public interface IManagement {
 		/**
 		 * The name of the dish.
 		 */
-		private final String name;
+		private String name;
 		/**
 		 * The description of the dish.
 		 */
-		private final String description;
+		private String description;
 		/**
 		 * The list of ingredients in the dish.
 		 */
@@ -153,6 +153,11 @@ public interface IManagement {
 		 * The list of allergens in the dish.
 		 */
 		private final ArrayList<String> allergens;
+		/**
+		 * The image of the dish.
+		 * This is stored as a byte array to allow for easy storage and network transmission.
+		 */
+		private byte[] image;
 		/**
 		 * The availability of the dish.
 		 */
@@ -222,6 +227,23 @@ public interface IManagement {
 		}
 
 		/**
+		 * Sets the name of the dish.
+		 *
+		 * @param name The name of the dish.
+		 * <hr/>
+		 * {@code @example (internal)}
+		 * <pre>
+		 *     // Assume an implementation of dishService
+		 *     Dish dish = dishService.getMenu().getDishes().get(0);
+		 *     System.out.println(dish.getName()); // Output: Pizza
+		 *     dish.setName("Delicious Pizza");
+		 * </pre>
+		 */
+		public void setName(String name) {
+			this.name = name;
+		}
+
+		/**
 		 * Returns the name of the dish.
 		 *
 		 * @return The name of the dish.
@@ -237,6 +259,22 @@ public interface IManagement {
 		 */
 		public String getName() {
 			return name;
+		}
+
+		/**
+		 * Sets the description of the dish.
+		 * @param description The description of the dish.
+		 * <hr/>
+		 * {@code @example (internal)}
+		 * <pre>
+		 *     // Assume an implementation of dishService
+		 *     Dish dish = dishService.getMenu().getDishes().get(0);
+		 *     System.out.println(dish.getDescription()); // Output: A delicious pizza
+		 *     dish.setDescription("A very delicious pizza");
+		 * </pre>
+		 */
+		public void setDescription(String description) {
+			this.description = description;
 		}
 
 		/**
@@ -288,6 +326,45 @@ public interface IManagement {
 		 */
 		public ArrayList<String> getAllergens() {
 			return allergens;
+		}
+
+		/**
+		 * Returns the image of the dish.
+		 *
+		 * @return The image of the dish.
+		 * {@code @example}
+		 * <pre>
+		 *     // Assume an implementation of dishService
+		 *     Dish dish = dishService.getMenu().getDishes().get(0);
+		 *     byte[] dishImage = dish.getImage();
+		 *
+		 *     ByteArrayInputStream byteStream = new ByteArrayInputStream(imageBytes);
+		 *     BufferedImage image = ImageIO.read(byteStream);
+		 * </pre>
+		 */
+		public byte[] getImage() {
+			return image;
+		}
+
+		/**
+		 * Sets the image of the dish.
+		 *
+		 * @param image The image of the dish.
+		 * {@code @example (internal)}
+		 * <pre>
+		 *     File imageFile = new File("your_image_path.jpg");
+		 *     BufferedImage image = ImageIO.read(imageFile);
+		 *
+		 *     ByteArrayOutputStream byteStream = new ByteArrayOutputStream();
+		 *     ImageIO.write(image, "jpg", byteStream);
+		 *
+		 *     // Assume an implementation of dishService
+		 *     Dish dish = dishService.getMenu().getDishes().get(0);
+		 *     dish.setImage(byteStream.toByteArray());
+		 * </pre>
+		 */
+		public void setImage(byte[] image) {
+			this.image = image;
 		}
 
 		/**
