@@ -136,7 +136,7 @@ public interface IManagement {
 		/**
 		 * The price of the dish in pence.
 		 */
-		private final int price;
+		private int price;
 		/**
 		 * The name of the dish.
 		 */
@@ -206,6 +206,22 @@ public interface IManagement {
 		 */
 		public int getDishID() {
 			return dishID;
+		}
+
+		/**
+		 * Sets the price of the dish in pence.
+		 * @param price The price of the dish in pence.
+		 * <hr/>
+		 * {@code @example}
+		 * <pre>
+		 *     // Assume an implementation of dishService
+		 *     Dish dish = dishService.getMenu().getDishes().get(0);
+		 *     System.out.println(dish.getPrice()); // Output: 1000
+		 *     dish.setPrice(1500);
+		 * </pre>
+		 */
+		public void setPrice(int price) {
+			this.price = price;
 		}
 
 		/**
