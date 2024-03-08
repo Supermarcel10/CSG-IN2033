@@ -3,11 +3,13 @@ package uk.ac.city;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.util.LinkedHashMap;
+import java.util.Objects;
 
 
 public class Main extends Application {
@@ -20,6 +22,10 @@ public class Main extends Application {
 
 	@Override
 	public void start(Stage primaryStage) {
+		String logoPath = "/image/logo.jpeg";
+		Image logo = new Image(Objects.requireNonNull(getClass().getResourceAsStream(logoPath)));
+		primaryStage.getIcons().add(logo);
+
 	    BorderPane root = new BorderPane();
 
 	    TabPane tabPane = new TabPane();
