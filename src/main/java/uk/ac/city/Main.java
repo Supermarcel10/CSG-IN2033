@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -28,6 +29,11 @@ public class Main extends Application {
 
 	    BorderPane root = new BorderPane();
 
+		ImageView logoView = new ImageView(logo);
+		logoView.setFitHeight(50); // TODO: Make this use relative sizing
+		logoView.setFitWidth(50); // TODO: Make this use relative sizing
+		root.setTop(logoView);
+
 	    TabPane tabPane = new TabPane();
 		tabPane.setTabClosingPolicy(TabPane.TabClosingPolicy.UNAVAILABLE);
 
@@ -39,7 +45,7 @@ public class Main extends Application {
 
 		root.setCenter(tabPane);
 
-	    Scene scene = new Scene(root, 600, 400);
+	    Scene scene = new Scene(root, 600, 400); // TODO: Make this use relative sizing
 	    primaryStage.setScene(scene);
 	    primaryStage.setTitle("Main Menu");
 	    primaryStage.show();
