@@ -10,8 +10,7 @@ As part of this project, we are developing a terminal system for the Kitchen sid
 
 Alternatively you can run the following commands:
 ```bash
-javac Main.java
-java Main
+mvn clean javafx:run
 ```
 
 ### Building the project
