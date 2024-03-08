@@ -1,6 +1,7 @@
 package uk.ac.city;
 
 import javafx.application.Application;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
@@ -32,7 +33,11 @@ public class Main extends Application {
 		ImageView logoView = new ImageView(logo);
 		logoView.setFitHeight(50); // TODO: Make this use relative sizing
 		logoView.setFitWidth(50); // TODO: Make this use relative sizing
-		root.setTop(logoView);
+
+		VBox imageBox = new VBox();
+		imageBox.setAlignment(Pos.TOP_CENTER);
+		imageBox.getChildren().add(logoView);
+		root.setTop(imageBox);
 
 	    TabPane tabPane = new TabPane();
 		tabPane.setTabClosingPolicy(TabPane.TabClosingPolicy.UNAVAILABLE);
