@@ -1,0 +1,62 @@
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox fx:id="mainContainer" spacing="10" xmlns:fx="http://javafx.com/fxml" xmlns="http://javafx.com/javafx">
+    <!-- Orders Section -->
+    <VBox fx:id="ordersSection" spacing="5">
+        <Label text="Orders" />
+        <!-- Orders list would go here, possibly another ListView or custom component -->
+    </VBox>
+
+    <!-- Menu Section -->
+    <HBox fx:id="menuSection" spacing="20">
+        <!-- Menu list and stock availability -->
+        <VBox fx:id="menuListSection" spacing="5">
+            <Label text="First Course -" />
+            <ListView fx:id="firstCourseListView">
+                <!-- List items would be added dynamically -->
+            </ListView>
+            <Button text="Add item" />
+            <Label text="Second Course -" />
+            <!-- Placeholder for second course list -->
+            <Button text="Add item" />
+            <Label text="Third Course -" />
+            <!-- Placeholder for third course list -->
+            <Button text="Add item" />
+        </VBox>
+
+        <!-- Stock availability -->
+        <VBox fx:id="stockAvailabilitySection" spacing="5">
+            <!-- These would be dynamically generated based on the menu items -->
+            <HBox spacing="10">
+                <Label text="Warm
+Onion Tart" />
+                <Label text="(Available)" styleClass="stock-available" />
+            </HBox>
+            <HBox spacing="10">
+                <Label text="Venison Pâté en Croûte" />
+                <Label text="(Not Available)" styleClass="stock-not-available" />
+            </HBox>
+            <HBox spacing="10">
+                <Label text="Lasagna of Rabbit Shoulder" />
+                <Label text="(Available)" styleClass="stock-available" />
+            </HBox>
+            <HBox spacing="10">
+                <Label text="Grilled Beef Tongue" />
+                <Label text="(Available)" styleClass="stock-available" />
+            </HBox>
+        </VBox>
+    </HBox>
+
+
+    <!-- Action buttons -->
+    <HBox fx:id="actionButtonsSection" spacing="20">
+        <Button text="Add category" />
+        <Button text="Remove item" />
+        <Button text="Remove category" />
+    </HBox>
+</VBox>
