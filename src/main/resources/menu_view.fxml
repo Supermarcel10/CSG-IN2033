@@ -4,7 +4,7 @@
 <?import javafx.scene.text.*?>
 <?import javafx.geometry.*?>
 
-<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.myjava.MenuController" spacing="20" alignment="TOP_CENTER" styleClass="main-container">
+<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uk.ac.city.MenuController" spacing="20" alignment="TOP_CENTER" styleClass="main-container">
     <stylesheets>
         C:\Users\Vince\OneDrive\Desktop\TeamPro\Myjava\src\main\resources\style.css
         @style.css

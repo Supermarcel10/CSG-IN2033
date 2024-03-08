@@ -1,4 +1,4 @@
-package com.example.myjava;
+package uk.ac.city;
 
 public class MenuItem {
     private final String name;

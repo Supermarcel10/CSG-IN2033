@@ -1,4 +1,4 @@
-package com.example.myjava;
+package uk.ac.city;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

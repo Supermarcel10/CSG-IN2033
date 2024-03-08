@@ -6,4 +6,6 @@ module com.example.myjava {
 
     opens com.example.myjava to javafx.fxml;
     exports com.example.myjava;
+	exports uk.ac.city;
+	opens uk.ac.city to javafx.fxml;
 }

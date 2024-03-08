@@ -1,4 +1,4 @@
-package com.example.myjava;
+package uk.ac.city;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
