@@ -2,7 +2,6 @@ package uk.ac.city.entities;
 
 import jakarta.persistence.*;
 import java.util.HashSet;
-import java.util.Set;
 
 
 @Entity
@@ -22,9 +21,12 @@ public class Stock {
 	@Column(name = "MaxQuantity")
 	private int maxQuantity;
 
-	@OneToMany(mappedBy = "stock", cascade = CascadeType.ALL, orphanRemoval = true)
-	private Set<StockIntake> intakes = new HashSet<>();
+	@OneToMany(mappedBy = "item")
+	private HashSet<DishRequiredStock> dishesUsing;
 
 	@OneToMany(mappedBy = "stock", cascade = CascadeType.ALL, orphanRemoval = true)
-	private Set<StockUsage> usages = new HashSet<>();
+	private HashSet<StockIntake> intakes = new HashSet<>();
+
+	@OneToMany(mappedBy = "stock", cascade = CascadeType.ALL, orphanRemoval = true)
+	private HashSet<StockUsage> usages = new HashSet<>();
 }

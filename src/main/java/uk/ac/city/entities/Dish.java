@@ -1,7 +1,7 @@
 package uk.ac.city.entities;
 
 import jakarta.persistence.*;
-import java.util.HashMap;
+import java.util.HashSet;
 
 
 @Entity
@@ -18,9 +18,9 @@ public class Dish {
 	@Column(name = "PricePence")
 	private int price;
 
-	// TODO: Check if this is right
-	@ElementCollection
-	@CollectionTable(name = "DishRequiredStock", joinColumns = @JoinColumn(name = "DishID"))
-	@Column(name = "Quantity")
-	private HashMap<Stock, Integer> requiredItems = new HashMap<>();
+	@OneToMany(mappedBy = "dish")
+	private HashSet<OrderDish> orders;
+
+	@OneToMany(mappedBy = "dish", cascade = CascadeType.ALL, orphanRemoval = true)
+	private HashSet<DishRequiredStock> requiredItems = new HashSet<>();
 }

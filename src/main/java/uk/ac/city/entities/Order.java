@@ -2,8 +2,7 @@ package uk.ac.city.entities;
 
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.HashSet;
 
 
 @Entity
@@ -27,9 +26,6 @@ public class Order {
 	@Column(name = "TotalPencePrice")
 	private int price;
 
-	// TODO: Check if this is right
-	@ElementCollection
-	@CollectionTable(name = "OrderDish", joinColumns = @JoinColumn(name = "OrderID"))
-	@Column(name = "Quantity")
-	private Map<Dish, Integer> dishes = new HashMap<>();
+	@OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
+	private HashSet<OrderDish> dishes;
 }
