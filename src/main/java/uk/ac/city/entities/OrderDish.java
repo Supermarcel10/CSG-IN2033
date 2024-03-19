@@ -1,7 +1,5 @@
 package uk.ac.city.entities;
 
-import jakarta.persistence.*;
-
 
 class OrderDish {
 	private int ID;
