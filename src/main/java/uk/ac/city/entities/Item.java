@@ -8,9 +8,9 @@ public class Item {
 	private final String name;
 	private int currentQuantity;
 	private int maxQuantity;
-	private HashSet<DishRequiredStock> dishesUsing;
-	private HashSet<StockIntake> intakes = new HashSet<>();
-	private HashSet<StockUsage> usages = new HashSet<>();
+	private final HashSet<DishRequiredStock> dishesUsing = new HashSet<>();
+	private final HashSet<StockIntake> intakes = new HashSet<>();
+	private final HashSet<StockUsage> usages = new HashSet<>();
 
 	public Item(String name, int maxQuantity) {
 		this.name = name;
@@ -73,15 +73,15 @@ public class Item {
 		return intakes;
 	}
 
-	public void setIntakes(HashSet<StockIntake> intakes) {
-		this.intakes = intakes;
+	public void addUsage(StockUsage usage) {
+		this.usages.add(usage);
 	}
 
 	public HashSet<StockUsage> getUsages() {
 		return usages;
 	}
 
-	public void setUsages(HashSet<StockUsage> usages) {
-		this.usages = usages;
+	public void addIntake(StockIntake intake) {
+		this.intakes.add(intake);
 	}
 }
