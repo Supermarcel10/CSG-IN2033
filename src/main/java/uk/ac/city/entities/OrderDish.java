@@ -3,21 +3,31 @@ package uk.ac.city.entities;
 import jakarta.persistence.*;
 
 
-@Entity
-@SecondaryTable(name = "OrderDish")
 class OrderDish {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int ID;
-
-	@ManyToOne
-	@JoinColumn(name = "OrderID")
 	private Order order;
-
-	@ManyToOne
-	@JoinColumn(name = "DishID")
 	private Dish dish;
-
-	@Column(name = "Quantity")
 	private int quantity;
+
+	OrderDish(Order order, Dish dish, int quantity) {
+		this.order = order;
+		this.dish = dish;
+		this.quantity = quantity;
+	}
+
+	public int getID() {
+		return ID;
+	}
+
+	public Order getOrder() {
+		return order;
+	}
+
+	public Dish getDish() {
+		return dish;
+	}
+
+	public int getQuantity() {
+		return quantity;
+	}
 }

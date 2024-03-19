@@ -1,26 +1,86 @@
 package uk.ac.city.entities;
 
-import jakarta.persistence.*;
+import java.util.HashMap;
 import java.util.HashSet;
 
 
-@Entity
-@Table(name = "Dish")
 public class Dish {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "DishID")
 	private int ID;
-
-	@Column(name = "Name")
 	private String name;
-
-	@Column(name = "PricePence")
-	private int price;
-
-	@OneToMany(mappedBy = "dish")
+	private int price = 0;
 	private HashSet<OrderDish> orders;
-
-	@OneToMany(mappedBy = "dish", cascade = CascadeType.ALL, orphanRemoval = true)
 	private HashSet<DishRequiredStock> requiredItems = new HashSet<>();
+
+	public Dish(String name) {
+		this.name = name;
+	}
+
+	public int getID() {
+		return ID;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public int getPrice() {
+		return price;
+	}
+
+	public void setPrice(int price) {
+		this.price = price;
+	}
+
+	/**
+	 * Get the orders where this dish exists.
+	 * @return A set of orders.
+	 */
+	public HashSet<Order> getOrders() {
+		HashSet<Order> orders = new HashSet<>();
+		for (OrderDish od : this.orders) {
+			orders.add(od.getOrder());
+		}
+
+		return orders;
+	}
+
+	public void addToOrder(Order order, int quantity) {
+		OrderDish orderDish = new OrderDish(order, this, quantity);
+		orders.add(orderDish);
+	}
+
+	public void removeFromOrder(Order order) {
+		OrderDish orderDish = null;
+		for (OrderDish od : orders) {
+			if (od.getOrder().equals(order)) {
+				orderDish = od;
+				break;
+			}
+		}
+
+		orders.remove(orderDish);
+	}
+
+	public HashSet<DishRequiredStock> getRequiredItems() {
+		return requiredItems;
+	}
+
+	public void setRequiredItems(HashSet<DishRequiredStock> requiredItems) {
+		this.requiredItems = requiredItems;
+	}
+
+	public void addItem(Item item, int quantity) {
+		DishRequiredStock dishItem = new DishRequiredStock(this, item, quantity);
+		requiredItems.add(dishItem);
+	}
+
+	public void addItems(HashMap<Item, Integer> items) {
+		for (Item item : items.keySet()) {
+			addItem(item, items.get(item));
+		}
+	}
 }

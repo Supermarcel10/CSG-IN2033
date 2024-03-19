@@ -1,24 +1,46 @@
 package uk.ac.city.entities;
 
-import jakarta.persistence.*;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 
 
-@Entity
-@Table(name = "Menu")
 public class Menu {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "MenuID")
 	private int ID;
-
-	@Column(name = "StartDate")
 	private LocalDateTime startDate;
-
-	@Column(name = "EndDate")
 	private LocalDateTime endDate;
+	private final HashSet<Dish> dishes;
 
-	@OneToMany(mappedBy = "menu", cascade = CascadeType.ALL, orphanRemoval = true)
-	private HashSet<Dish> dishes = new HashSet<>();
+	public Menu(LocalDateTime startDate, LocalDateTime endDate, HashSet<Dish> dishes) {
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.dishes = dishes;
+	}
+
+	public LocalDateTime getStartDate() {
+		return startDate;
+	}
+
+	public void setStartDate(LocalDateTime startDate) {
+		this.startDate = startDate;
+	}
+
+	public LocalDateTime getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(LocalDateTime endDate) {
+		this.endDate = endDate;
+	}
+
+	public HashSet<Dish> getDishes() {
+		return dishes;
+	}
+
+	public void addDish(Dish dish) {
+		dishes.add(dish);
+	}
+
+	public void removeDish(Dish dish) {
+		dishes.remove(dish);
+	}
 }

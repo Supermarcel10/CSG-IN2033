@@ -1,33 +1,25 @@
 package uk.ac.city.entities;
 
-import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
 
-@Entity
-@Table(name = "StockUsage")
-public class StockUsage {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "StockUsageID")
-	private int ID;
-
-	@ManyToOne
-	@JoinColumn(name = "StockID", nullable = false)
-	private Stock item;
-
-	@Column(name = "UsageDateTime")
-	private LocalDateTime dateTime;
-
-	@Column(name = "UsageType")
-	private UsageType usageType;
-
-	@Column(name = "Quantity")
-	private int quantity;
+public class StockUsage extends StockEntity {
+	private final UsageType usageType;
 
 	public enum UsageType {
 		USED,
 		WASTED,
 		EXPIRED
+	}
+
+	public StockUsage(Item item, LocalDateTime dateTime, int quantity, UsageType usageType) {
+		this.item = item;
+		this.dateTime = dateTime;
+		this.quantity = quantity;
+		this.usageType = usageType;
+	}
+
+	public UsageType getUsageType() {
+		return usageType;
 	}
 }

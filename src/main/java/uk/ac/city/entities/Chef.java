@@ -1,33 +1,59 @@
 package uk.ac.city.entities;
 
-import jakarta.persistence.*;
 import java.util.HashSet;
 
 
-@Entity
-@Table(name = "Chef")
 public class Chef {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "ChefID")
 	private int ID;
-
-	@Column(name = "Name")
 	private String name;
-
-	@Column(name = "Role")
 	private ChefType role;
 
 	// TODO: Ask customer what their stance is on security
-	@Column(name = "Password")
 	private String password;
 
-	@OneToMany(mappedBy = "assignedChef")
-	private HashSet<Order> orders = new HashSet<>();
+	private HashSet<Order> orders;
 
 	public enum ChefType {
 		HEAD_CHEF,
 		SOUS_CHEF,
 		LINE_CHEF
+	}
+
+	public Chef(String name, ChefType role, String password) {
+		this.name = name;
+		this.role = role;
+		this.password = password;
+	}
+
+	public int getID() {
+		return ID;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public ChefType getRole() {
+		return role;
+	}
+
+	public boolean login(String password) {
+		return this.password.equals(password);
+	}
+
+	public HashSet<Order> getOrders() {
+		return orders;
+	}
+
+	public void addOrder(Order order) {
+		orders.add(order);
+	}
+
+	public void removeOrder(Order order) {
+		orders.remove(order);
 	}
 }

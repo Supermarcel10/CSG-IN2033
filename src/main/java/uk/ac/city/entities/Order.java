@@ -1,31 +1,70 @@
 package uk.ac.city.entities;
 
-import jakarta.persistence.*;
 import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.HashSet;
 
 
-@Entity
-@Table(name = "Order")
 public class Order {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "OrderID")
 	private int ID;
-
-	@Column(name = "OrderDateTime")
-	private LocalDateTime orderDateTime;
-
-	@Column(name = "TableNumber")
-	private int tableNumber;
-
-	@ManyToOne
-	@JoinColumn(name = "AssignedChefID")
+	private final LocalDateTime orderDateTime;
+	private final int tableNumber;
 	private Chef assignedChef;
+	private final int price;
+	private HashSet<OrderDish> dishes = new HashSet<>();
 
-	@Column(name = "TotalPencePrice")
-	private int price;
+	public Order(LocalDateTime orderDateTime, int tableNumber, int price, HashMap<Dish, Integer> dishes) {
+		this.orderDateTime = orderDateTime;
+		this.tableNumber = tableNumber;
+		this.price = price;
+		for (Dish dish : dishes.keySet()) {
+			this.dishes.add(new OrderDish(this, dish, dishes.get(dish)));
+		}
+	}
 
-	@OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
-	private HashSet<OrderDish> dishes;
+	public int getID() {
+		return ID;
+	}
+
+	public LocalDateTime getOrderDateTime() {
+		return orderDateTime;
+	}
+
+	public int getTableNumber() {
+		return tableNumber;
+	}
+
+	public Chef getAssignedChef() {
+		return assignedChef;
+	}
+
+	public void setAssignedChef(Chef assignedChef) {
+		this.assignedChef = assignedChef;
+	}
+
+	public int getPrice() {
+		return price;
+	}
+
+	public HashMap<Dish, Integer> getDishesWithQuantities() {
+		HashMap<Dish, Integer> dishMap = new HashMap<>();
+		for (OrderDish orderDish : dishes) {
+			dishMap.put(orderDish.getDish(), orderDish.getQuantity());
+		}
+
+		return dishMap;
+	}
+
+	public void addDish(Dish dish, int quantity) {
+		dishes.add(new OrderDish(this, dish, quantity));
+	}
+
+	public void removeDish(Dish dish) {
+		for (OrderDish orderDish : dishes) {
+			if (orderDish.getDish().equals(dish)) {
+				dishes.remove(orderDish);
+				break;
+			}
+		}
+	}
 }
