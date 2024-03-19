@@ -39,20 +39,11 @@ public class Dish {
 		return orders;
 	}
 
-	public void addToOrder(Order order, int quantity) {
-		OrderDish orderDish = new OrderDish(order, this, quantity);
+	void addToOrder(OrderDish orderDish) {
 		orders.add(orderDish);
 	}
 
-	public void removeFromOrder(Order order) {
-		OrderDish orderDish = null;
-		for (OrderDish od : orders) {
-			if (od.getOrder().equals(order)) {
-				orderDish = od;
-				break;
-			}
-		}
-
+	void removeFromOrder(OrderDish orderDish) {
 		orders.remove(orderDish);
 	}
 

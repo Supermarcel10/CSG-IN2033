@@ -15,8 +15,12 @@ public class Order {
 	public Order(LocalDateTime orderDateTime, int tableNumber, HashMap<Dish, Integer> dishes) {
 		this.orderDateTime = orderDateTime;
 		this.tableNumber = tableNumber;
+
 		for (Dish dish : dishes.keySet()) {
-			this.dishes.add(new OrderDish(this, dish, dishes.get(dish)));
+			OrderDish orderDish = new OrderDish(this, dish, dishes.get(dish));
+
+			this.dishes.add(orderDish);
+			dish.addToOrder(orderDish);
 		}
 	}
 
