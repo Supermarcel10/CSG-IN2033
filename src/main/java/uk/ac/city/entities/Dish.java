@@ -62,12 +62,18 @@ public class Dish {
 
 	public void addItem(Item item, int quantity) {
 		DishRequiredStock dishItem = new DishRequiredStock(this, item, quantity);
+
 		requiredItems.add(dishItem);
+		item.addDishUsing(dishItem);
 	}
 
-	public void addItems(HashMap<Item, Integer> items) {
-		for (Item item : items.keySet()) {
-			addItem(item, items.get(item));
+	void removeItem(Item item) {
+		DishRequiredStock dishItem = requiredItems.stream().filter(drs -> drs.getItem().equals(item)).findFirst().orElse(null);
+		if (dishItem == null) {
+			throw new IllegalArgumentException("Item does not exist in dish");
 		}
+
+		requiredItems.remove(dishItem);
+		dishItem.getItem().removeDishUsing(dishItem);
 	}
 }

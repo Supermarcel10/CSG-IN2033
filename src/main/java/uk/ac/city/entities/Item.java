@@ -5,13 +5,12 @@ import java.util.HashSet;
 
 public class Item {
 	private int ID;
-	private String name;
+	private final String name;
 	private int currentQuantity;
 	private int maxQuantity;
 	private HashSet<DishRequiredStock> dishesUsing;
 	private HashSet<StockIntake> intakes = new HashSet<>();
 	private HashSet<StockUsage> usages = new HashSet<>();
-
 
 	public Item(String name, int maxQuantity) {
 		this.name = name;
@@ -62,9 +61,12 @@ public class Item {
 		return dishes;
 	}
 
-	public void addDishUsing(Dish dish, int quantity) {
-		DishRequiredStock drs = new DishRequiredStock(dish, this, quantity);
+	void addDishUsing(DishRequiredStock drs) {
 		this.dishesUsing.add(drs);
+	}
+
+	void removeDishUsing(DishRequiredStock drs) {
+		this.dishesUsing.remove(drs);
 	}
 
 	public HashSet<StockIntake> getIntakes() {
