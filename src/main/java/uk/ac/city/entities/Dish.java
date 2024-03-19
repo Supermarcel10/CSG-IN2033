@@ -39,11 +39,11 @@ public class Dish {
 		return orders;
 	}
 
-	void addToOrder(OrderDish orderDish) {
+	void addOrder(OrderDish orderDish) {
 		orders.add(orderDish);
 	}
 
-	void removeFromOrder(OrderDish orderDish) {
+	void removeOrder(OrderDish orderDish) {
 		orders.remove(orderDish);
 	}
 

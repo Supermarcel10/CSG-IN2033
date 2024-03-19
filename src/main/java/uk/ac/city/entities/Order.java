@@ -20,7 +20,7 @@ public class Order {
 			OrderDish orderDish = new OrderDish(this, dish, dishes.get(dish));
 
 			this.dishes.add(orderDish);
-			dish.addToOrder(orderDish);
+			dish.addOrder(orderDish);
 		}
 	}
 
