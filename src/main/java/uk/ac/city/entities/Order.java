@@ -67,10 +67,8 @@ public class Order {
 
 	public void removeDish(Dish dish) {
 		for (OrderDish orderDish : dishes) {
-			if (orderDish.getDish().equals(dish)) {
-				dishes.remove(orderDish);
-				break;
-			}
+			// TODO: Make a method to destroy an OrderDish instance
+			dishes.remove(orderDish);
 		}
 	}
 
