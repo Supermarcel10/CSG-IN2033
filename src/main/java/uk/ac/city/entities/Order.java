@@ -11,6 +11,7 @@ public class Order {
 	private final int tableNumber;
 	private Chef assignedChef;
 	private final HashSet<OrderDish> dishes = new HashSet<>();
+	private final HashMap<Item, Integer> requiredItems = new HashMap<>();
 
 	public Order(LocalDateTime orderDateTime, int tableNumber, HashMap<Dish, Integer> dishes) {
 		this.orderDateTime = orderDateTime;
@@ -55,6 +56,13 @@ public class Order {
 
 	public void addDish(Dish dish, int quantity) {
 		dishes.add(new OrderDish(this, dish, quantity));
+
+		for (Item item : dish.getRequiredItems().keySet()) {
+			int requiredQuantity = dish.getRequiredItems().get(item) * quantity;
+
+			// If the item is already in the requiredItems map, add the new quantity to the existing quantity, otherwise add a new entry
+			requiredItems.put(item, requiredItems.getOrDefault(item, 0) + requiredQuantity);
+		}
 	}
 
 	public void removeDish(Dish dish) {
@@ -64,5 +72,9 @@ public class Order {
 				break;
 			}
 		}
+	}
+
+	public HashMap<Item, Integer> getRequiredItems() {
+		return requiredItems;
 	}
 }
