@@ -7,7 +7,6 @@ import java.util.HashSet;
 public class Dish {
 	private int ID;
 	private String name;
-	private int price = 0;
 	private final HashSet<OrderDish> orders = new HashSet<>();
 	private final HashSet<DishRequiredStock> requiredItems = new HashSet<>();
 
@@ -25,14 +24,6 @@ public class Dish {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public int getPrice() {
-		return price;
-	}
-
-	public void setPrice(int price) {
-		this.price = price;
 	}
 
 	/**

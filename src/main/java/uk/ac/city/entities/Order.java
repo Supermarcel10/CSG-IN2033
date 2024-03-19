@@ -10,13 +10,11 @@ public class Order {
 	private final LocalDateTime orderDateTime;
 	private final int tableNumber;
 	private Chef assignedChef;
-	private final int price;
-	private HashSet<OrderDish> dishes = new HashSet<>();
+	private final HashSet<OrderDish> dishes = new HashSet<>();
 
-	public Order(LocalDateTime orderDateTime, int tableNumber, int price, HashMap<Dish, Integer> dishes) {
+	public Order(LocalDateTime orderDateTime, int tableNumber, HashMap<Dish, Integer> dishes) {
 		this.orderDateTime = orderDateTime;
 		this.tableNumber = tableNumber;
-		this.price = price;
 		for (Dish dish : dishes.keySet()) {
 			this.dishes.add(new OrderDish(this, dish, dishes.get(dish)));
 		}
@@ -40,10 +38,6 @@ public class Order {
 
 	public void setAssignedChef(Chef assignedChef) {
 		this.assignedChef = assignedChef;
-	}
-
-	public int getPrice() {
-		return price;
 	}
 
 	public HashMap<Dish, Integer> getDishesWithQuantities() {
