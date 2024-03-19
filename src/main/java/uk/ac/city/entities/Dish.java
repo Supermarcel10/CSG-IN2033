@@ -8,8 +8,8 @@ public class Dish {
 	private int ID;
 	private String name;
 	private int price = 0;
-	private HashSet<OrderDish> orders;
-	private HashSet<DishRequiredStock> requiredItems = new HashSet<>();
+	private final HashSet<OrderDish> orders = new HashSet<>();
+	private final HashSet<DishRequiredStock> requiredItems = new HashSet<>();
 
 	public Dish(String name) {
 		this.name = name;
@@ -65,12 +65,13 @@ public class Dish {
 		orders.remove(orderDish);
 	}
 
-	public HashSet<DishRequiredStock> getRequiredItems() {
-		return requiredItems;
-	}
+	public HashSet<Item> getRequiredItems() {
+		HashSet<Item> items = new HashSet<>();
+		for (DishRequiredStock drs : requiredItems) {
+			items.add(drs.getItem());
+		}
 
-	public void setRequiredItems(HashSet<DishRequiredStock> requiredItems) {
-		this.requiredItems = requiredItems;
+		return items;
 	}
 
 	public void addItem(Item item, int quantity) {
