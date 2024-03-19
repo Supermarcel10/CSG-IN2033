@@ -65,10 +65,14 @@ public class Dish {
 		orders.remove(orderDish);
 	}
 
-	public HashSet<Item> getRequiredItems() {
-		HashSet<Item> items = new HashSet<>();
+	/**
+	 * Get the required items for this dish.
+	 * @return A map of items and their quantities.
+	 */
+	public HashMap<Item, Integer> getRequiredItems() {
+		HashMap<Item, Integer> items = new HashMap<>();
 		for (DishRequiredStock drs : requiredItems) {
-			items.add(drs.getItem());
+			items.put(drs.getItem(), drs.getQuantity());
 		}
 
 		return items;
