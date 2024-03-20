@@ -10,6 +10,7 @@ public class Dish {
 	private String name;
 	private final HashSet<OrderDish> orders = new HashSet<>();
 	private final HashSet<DishRequiredIngredients> requiredItems = new HashSet<>();
+	private String recipe;
 	private Image image;
 
 	public Dish(String name) {
@@ -77,5 +78,17 @@ public class Dish {
 
 		requiredItems.remove(dishItem);
 		dishItem.getItem().removeDishUsing(dishItem);
+	}
+
+	public String getRecipe() {
+		return recipe;
+	}
+
+	public void setRecipe(String recipe) {
+		this.recipe = recipe;
+	}
+
+	public Image getImage() {
+		return image;
 	}
 }
