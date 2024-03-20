@@ -3,9 +3,9 @@ package uk.ac.city.entities;
 
 class OrderDish {
 	private int ID;
-	private Order order;
-	private Dish dish;
-	private int quantity;
+	private final Order order;
+	private final Dish dish;
+	private final int quantity;
 
 	OrderDish(Order order, Dish dish, int quantity) {
 		this.order = order;
