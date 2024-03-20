@@ -22,14 +22,18 @@ public class Order {
 
 			this.dishes.add(orderDish);
 			dish.addOrder(orderDish);
-
-			for (Ingredient ingredient : dish.getRequiredItems().keySet()) {
-				int requiredQuantity = dish.getRequiredItems().get(ingredient) * dishes.get(dish);
-
-				// If the item is already in the requiredItems map, add the new quantity to the existing quantity, otherwise add a new entry
-				requiredItems.put(ingredient, requiredItems.getOrDefault(ingredient, 0) + requiredQuantity);
-			}
+			recalculateRequiredItems(dish, false);
 		}
+	}
+
+	private void recalculateRequiredItems(Dish dish, boolean removal) {
+		dish.getRequiredItems().forEach((ingredient, quantity) -> {
+			int requiredQuantity = quantity * dish.getRequiredItems().get(ingredient);
+			if (removal) requiredQuantity *= -1;
+
+			// If the item is already in the requiredItems map, add the new quantity to the existing quantity, otherwise add a new entry
+			requiredItems.put(ingredient, requiredItems.getOrDefault(ingredient, 0) + requiredQuantity);
+		});
 	}
 
 	public int getID() {
@@ -63,13 +67,7 @@ public class Order {
 
 	public void addDish(Dish dish, int quantity) {
 		dishes.add(new OrderDish(this, dish, quantity));
-
-		for (Ingredient ingredient : dish.getRequiredItems().keySet()) {
-			int requiredQuantity = dish.getRequiredItems().get(ingredient) * quantity;
-
-			// If the item is already in the requiredItems map, add the new quantity to the existing quantity, otherwise add a new entry
-			requiredItems.put(ingredient, requiredItems.getOrDefault(ingredient, 0) + requiredQuantity);
-		}
+		recalculateRequiredItems(dish, false);
 	}
 
 	public void removeDish(Dish dish) {
@@ -77,6 +75,8 @@ public class Order {
 			orderDish.Destruct();
 			dishes.remove(orderDish);
 		}
+
+		recalculateRequiredItems(dish, true);
 	}
 
 	public HashMap<Ingredient, Integer> getRequiredItems() {
