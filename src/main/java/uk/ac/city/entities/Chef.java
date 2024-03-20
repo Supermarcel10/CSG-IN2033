@@ -8,7 +8,6 @@ public class Chef {
 	private String name;
 	private ChefType role;
 	private String password; // TODO: Encrypt this
-
 	private HashSet<Order> orders;
 
 	public enum ChefType {
