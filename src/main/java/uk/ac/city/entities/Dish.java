@@ -51,8 +51,8 @@ public class Dish {
 	 * Get the required items for this dish.
 	 * @return A map of items and their quantities.
 	 */
-	public HashMap<Item, Integer> getRequiredItems() {
-		HashMap<Item, Integer> items = new HashMap<>();
+	public HashMap<Ingredient, Integer> getRequiredItems() {
+		HashMap<Ingredient, Integer> items = new HashMap<>();
 		for (DishRequiredStock drs : requiredItems) {
 			items.put(drs.getItem(), drs.getQuantity());
 		}
@@ -60,15 +60,15 @@ public class Dish {
 		return items;
 	}
 
-	public void addItem(Item item, int quantity) {
-		DishRequiredStock dishItem = new DishRequiredStock(this, item, quantity);
+	public void addItem(Ingredient ingredient, int quantity) {
+		DishRequiredStock dishItem = new DishRequiredStock(this, ingredient, quantity);
 
 		requiredItems.add(dishItem);
-		item.addDishUsing(dishItem);
+		ingredient.addDishUsing(dishItem);
 	}
 
-	void removeItem(Item item) {
-		DishRequiredStock dishItem = requiredItems.stream().filter(drs -> drs.getItem().equals(item)).findFirst().orElse(null);
+	void removeItem(Ingredient ingredient) {
+		DishRequiredStock dishItem = requiredItems.stream().filter(drs -> drs.getItem().equals(ingredient)).findFirst().orElse(null);
 		if (dishItem == null) {
 			throw new IllegalArgumentException("Item does not exist in dish");
 		}

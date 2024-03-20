@@ -3,9 +3,9 @@ package uk.ac.city.entities;
 import java.time.LocalDateTime;
 
 
-class StockEntity {
+class IngredientChangeEntity {
 	protected int ID;
-	protected Item item;
+	protected Ingredient ingredient;
 	protected LocalDateTime dateTime;
 	protected int quantity;
 
@@ -13,8 +13,8 @@ class StockEntity {
 		return ID;
 	}
 
-	public Item getItem() {
-		return item;
+	public Ingredient getItem() {
+		return ingredient;
 	}
 
 	public LocalDateTime getDateTime() {

@@ -3,7 +3,7 @@ package uk.ac.city.entities;
 import java.time.LocalDateTime;
 
 
-public class StockUsage extends StockEntity {
+public class IngredientChangeUsage extends IngredientChangeEntity {
 	private final UsageType usageType;
 
 	public enum UsageType {
@@ -12,8 +12,8 @@ public class StockUsage extends StockEntity {
 		EXPIRED
 	}
 
-	public StockUsage(Item item, LocalDateTime dateTime, int quantity, UsageType usageType) {
-		this.item = item;
+	public IngredientChangeUsage(Ingredient ingredient, LocalDateTime dateTime, int quantity, UsageType usageType) {
+		this.ingredient = ingredient;
 		this.dateTime = dateTime;
 		this.quantity = quantity;
 		this.usageType = usageType;

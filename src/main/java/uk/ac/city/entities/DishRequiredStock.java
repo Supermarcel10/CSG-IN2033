@@ -4,12 +4,12 @@ package uk.ac.city.entities;
 class DishRequiredStock {
 	private Integer ID;
 	private Dish dish;
-	private Item item;
+	private Ingredient ingredient;
 	private Integer quantity;
 
-	public DishRequiredStock(Dish dish, Item item, int quantity) {
+	public DishRequiredStock(Dish dish, Ingredient ingredient, int quantity) {
 		this.dish = dish;
-		this.item = item;
+		this.ingredient = ingredient;
 		this.quantity = quantity;
 	}
 
@@ -21,8 +21,8 @@ class DishRequiredStock {
 		return dish;
 	}
 
-	public Item getItem() {
-		return item;
+	public Ingredient getItem() {
+		return ingredient;
 	}
 
 	public Integer getQuantity() {

@@ -3,22 +3,22 @@ package uk.ac.city.entities;
 import java.util.HashSet;
 
 
-public class Item {
+public class Ingredient {
 	private int ID;
 	private final String name;
 	private int currentQuantity;
 	private int maxQuantity;
 	private final HashSet<DishRequiredStock> dishesUsing = new HashSet<>();
-	private final HashSet<StockIntake> intakes = new HashSet<>();
-	private final HashSet<StockUsage> usages = new HashSet<>();
+	private final HashSet<IngredientChangeIntake> intakes = new HashSet<>();
+	private final HashSet<IngredientChangeUsage> usages = new HashSet<>();
 
-	public Item(String name, int maxQuantity) {
+	public Ingredient(String name, int maxQuantity) {
 		this.name = name;
 		this.maxQuantity = maxQuantity;
 		this.currentQuantity = 0;
 	}
 
-	public Item(String name) {
+	public Ingredient(String name) {
 		this.name = name;
 		this.maxQuantity = 0;
 		this.currentQuantity = 0;
@@ -69,19 +69,19 @@ public class Item {
 		this.dishesUsing.remove(drs);
 	}
 
-	public HashSet<StockIntake> getIntakes() {
+	public HashSet<IngredientChangeIntake> getIntakes() {
 		return intakes;
 	}
 
-	public void addUsage(StockUsage usage) {
+	public void addUsage(IngredientChangeUsage usage) {
 		this.usages.add(usage);
 	}
 
-	public HashSet<StockUsage> getUsages() {
+	public HashSet<IngredientChangeUsage> getUsages() {
 		return usages;
 	}
 
-	public void addIntake(StockIntake intake) {
+	public void addIntake(IngredientChangeIntake intake) {
 		this.intakes.add(intake);
 	}
 }
