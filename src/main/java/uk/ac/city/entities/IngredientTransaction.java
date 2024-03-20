@@ -3,7 +3,7 @@ package uk.ac.city.entities;
 import java.time.LocalDateTime;
 
 
-public class IngredientTransaction extends IngredientChangeEntity {
+public class IngredientTransaction {
 	private int ID;
 	private final Ingredient ingredient;
 	private final LocalDateTime dateTime;
