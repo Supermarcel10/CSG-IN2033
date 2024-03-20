@@ -7,9 +7,7 @@ public class Chef {
 	private int ID;
 	private String name;
 	private ChefType role;
-
-	// TODO: Ask customer what their stance is on security
-	private String password;
+	private String password; // TODO: Encrypt this
 
 	private HashSet<Order> orders;
 
