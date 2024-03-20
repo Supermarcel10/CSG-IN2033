@@ -22,6 +22,13 @@ public class Order {
 
 			this.dishes.add(orderDish);
 			dish.addOrder(orderDish);
+
+			for (Ingredient ingredient : dish.getRequiredItems().keySet()) {
+				int requiredQuantity = dish.getRequiredItems().get(ingredient) * dishes.get(dish);
+
+				// If the item is already in the requiredItems map, add the new quantity to the existing quantity, otherwise add a new entry
+				requiredItems.put(ingredient, requiredItems.getOrDefault(ingredient, 0) + requiredQuantity);
+			}
 		}
 	}
 
