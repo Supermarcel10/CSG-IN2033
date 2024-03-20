@@ -7,7 +7,6 @@ public class Chef {
 	private int ID;
 	private String name;
 	private ChefType role;
-	private String password; // TODO: Encrypt this
 	private HashSet<Order> orders;
 
 	public enum ChefType {
@@ -16,10 +15,9 @@ public class Chef {
 		LINE_CHEF
 	}
 
-	public Chef(String name, ChefType role, String password) {
+	public Chef(String name, ChefType role) {
 		this.name = name;
 		this.role = role;
-		this.password = password;
 	}
 
 	public int getID() {
@@ -39,7 +37,8 @@ public class Chef {
 	}
 
 	public boolean login(String password) {
-		return this.password.equals(password);
+		// TODO: Encrypt this and compare with database
+		return false;
 	}
 
 	public HashSet<Order> getOrders() {
