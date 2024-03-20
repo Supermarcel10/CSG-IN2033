@@ -9,8 +9,7 @@ public class Ingredient {
 	private int currentQuantity;
 	private int maxQuantity;
 	private final HashSet<DishRequiredStock> dishesUsing = new HashSet<>();
-	private final HashSet<IngredientChangeIntake> intakes = new HashSet<>();
-	private final HashSet<IngredientChangeUsage> usages = new HashSet<>();
+	private final HashSet<IngredientTransaction> changes = new HashSet<>();
 
 	public Ingredient(String name, int maxQuantity) {
 		this.name = name;
@@ -69,19 +68,11 @@ public class Ingredient {
 		this.dishesUsing.remove(drs);
 	}
 
-	public HashSet<IngredientChangeIntake> getIntakes() {
-		return intakes;
+	public void addUsage(IngredientTransaction change) {
+		this.changes.add(change);
 	}
 
-	public void addUsage(IngredientChangeUsage usage) {
-		this.usages.add(usage);
-	}
-
-	public HashSet<IngredientChangeUsage> getUsages() {
-		return usages;
-	}
-
-	public void addIntake(IngredientChangeIntake intake) {
-		this.intakes.add(intake);
+	public HashSet<IngredientTransaction> getChanges() {
+		return changes;
 	}
 }
