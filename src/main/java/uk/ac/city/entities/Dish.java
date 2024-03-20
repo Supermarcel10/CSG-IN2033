@@ -1,5 +1,6 @@
 package uk.ac.city.entities;
 
+import javafx.scene.image.Image;
 import java.util.HashMap;
 import java.util.HashSet;
 
@@ -9,6 +10,7 @@ public class Dish {
 	private String name;
 	private final HashSet<OrderDish> orders = new HashSet<>();
 	private final HashSet<DishRequiredIngredients> requiredItems = new HashSet<>();
+	private Image image;
 
 	public Dish(String name) {
 		this.name = name;
