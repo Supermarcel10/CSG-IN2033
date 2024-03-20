@@ -13,6 +13,10 @@ class OrderDish {
 		this.quantity = quantity;
 	}
 
+	void Destruct() {
+		// TODO: Implement this method to destruct the object in database prior to memory deallocation by GC
+	}
+
 	public int getID() {
 		return ID;
 	}

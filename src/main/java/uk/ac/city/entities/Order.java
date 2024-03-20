@@ -67,7 +67,7 @@ public class Order {
 
 	public void removeDish(Dish dish) {
 		for (OrderDish orderDish : dishes) {
-			// TODO: Make a method to destroy an OrderDish instance
+			orderDish.Destruct();
 			dishes.remove(orderDish);
 		}
 	}
