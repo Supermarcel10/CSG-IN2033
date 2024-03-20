@@ -8,7 +8,7 @@ public class Ingredient {
 	private final String name;
 	private int currentQuantity;
 	private int maxQuantity;
-	private final HashSet<DishRequiredStock> dishesUsing = new HashSet<>();
+	private final HashSet<DishRequiredIngredients> dishesUsing = new HashSet<>();
 	private final HashSet<IngredientTransaction> changes = new HashSet<>();
 
 	public Ingredient(String name, int maxQuantity) {
@@ -53,18 +53,18 @@ public class Ingredient {
 	 */
 	public HashSet<Dish> getDishesUsing() {
 		HashSet<Dish> dishes = new HashSet<>();
-		for (DishRequiredStock drs : this.dishesUsing) {
+		for (DishRequiredIngredients drs : this.dishesUsing) {
 			dishes.add(drs.getDish());
 		}
 
 		return dishes;
 	}
 
-	void addDishUsing(DishRequiredStock drs) {
+	void addDishUsing(DishRequiredIngredients drs) {
 		this.dishesUsing.add(drs);
 	}
 
-	void removeDishUsing(DishRequiredStock drs) {
+	void removeDishUsing(DishRequiredIngredients drs) {
 		this.dishesUsing.remove(drs);
 	}
 

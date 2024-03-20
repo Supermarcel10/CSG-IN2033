@@ -8,7 +8,7 @@ public class Dish {
 	private int ID;
 	private String name;
 	private final HashSet<OrderDish> orders = new HashSet<>();
-	private final HashSet<DishRequiredStock> requiredItems = new HashSet<>();
+	private final HashSet<DishRequiredIngredients> requiredItems = new HashSet<>();
 
 	public Dish(String name) {
 		this.name = name;
@@ -53,7 +53,7 @@ public class Dish {
 	 */
 	public HashMap<Ingredient, Integer> getRequiredItems() {
 		HashMap<Ingredient, Integer> items = new HashMap<>();
-		for (DishRequiredStock drs : requiredItems) {
+		for (DishRequiredIngredients drs : requiredItems) {
 			items.put(drs.getItem(), drs.getQuantity());
 		}
 
@@ -61,14 +61,14 @@ public class Dish {
 	}
 
 	public void addItem(Ingredient ingredient, int quantity) {
-		DishRequiredStock dishItem = new DishRequiredStock(this, ingredient, quantity);
+		DishRequiredIngredients dishItem = new DishRequiredIngredients(this, ingredient, quantity);
 
 		requiredItems.add(dishItem);
 		ingredient.addDishUsing(dishItem);
 	}
 
 	void removeItem(Ingredient ingredient) {
-		DishRequiredStock dishItem = requiredItems.stream().filter(drs -> drs.getItem().equals(ingredient)).findFirst().orElse(null);
+		DishRequiredIngredients dishItem = requiredItems.stream().filter(drs -> drs.getItem().equals(ingredient)).findFirst().orElse(null);
 		if (dishItem == null) {
 			throw new IllegalArgumentException("Item does not exist in dish");
 		}

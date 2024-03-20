@@ -1,13 +1,13 @@
 package uk.ac.city.entities;
 
 
-class DishRequiredStock {
+class DishRequiredIngredients {
 	private Integer ID;
-	private Dish dish;
-	private Ingredient ingredient;
-	private Integer quantity;
+	private final Dish dish;
+	private final Ingredient ingredient;
+	private final Integer quantity;
 
-	public DishRequiredStock(Dish dish, Ingredient ingredient, int quantity) {
+	public DishRequiredIngredients(Dish dish, Ingredient ingredient, int quantity) {
 		this.dish = dish;
 		this.ingredient = ingredient;
 		this.quantity = quantity;
