@@ -7,6 +7,7 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -15,7 +16,9 @@ import java.util.Objects;
 
 
 public class Main extends Application {
-	private static final LinkedHashMap<String, VBox> tabs = new LinkedHashMap<>();
+	//private static final LinkedHashMap<String, VBox> tabs = new LinkedHashMap<>();
+	private static final LinkedHashMap<String, Pane> tabs = new LinkedHashMap<>();
+
 	static {
 		tabs.put("Orders", new OrdersTab());
 		tabs.put("Menu", new MenuTab());

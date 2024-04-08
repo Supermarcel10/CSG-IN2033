@@ -1,76 +1,71 @@
 package uk.ac.city;
 
-import javafx.beans.property.SimpleBooleanProperty;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.scene.control.ListView;
-import javafx.scene.control.cell.CheckBoxListCell;
+import javafx.geometry.Insets;
+import javafx.scene.control.*;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.util.StringConverter;
+import javafx.scene.control.cell.CheckBoxListCell;
 
-public class MenuTab extends VBox {
-
-	private final ObservableList<MenuItem> menuItems;
+public class MenuTab extends HBox {
 
 	public MenuTab() {
-		// Sample menu items, this could be loaded from a database or file in a real application
-		menuItems = FXCollections.observableArrayList(
-			new MenuItem("Warm Onion Tart", 12.0, true),
-			new MenuItem("Venison Pâté en Croûte", 13.0, false),
-			new MenuItem("Lasagna of Rabbit Shoulder", 12.0, true),
-			new MenuItem("Grilled Beef Tongue", 14.0, true)
-		);
+		this.setSpacing(10);
+		this.setPadding(new Insets(10));
 
-		ListView<MenuItem> listView = new ListView<>(menuItems);
-		listView.setCellFactory(CheckBoxListCell.forListView(
-			item -> item.isAvailableProperty(),
-			new StringConverter<MenuItem>() {
-				@Override
-				public String toString(MenuItem item) {
-					// String representation for the ListView cell
-					return String.format("%s £%.2f", item.getName(), item.getPrice());
-				}
+		// Select Menu Section
+		VBox selectMenuSection = createSelectMenuSection();
 
-				@Override
-				public MenuItem fromString(String string) {
-					// Conversion from string to MenuItem is not required for this ListView
-					return null;
-				}
-			}
-		));
+		// Menu Description Section
+		VBox menuDescriptionSection = createMenuDescriptionSection();
 
-		this.getChildren().add(listView);
-	}
-}
+		// Dish Description Section
+		VBox dishDescriptionSection = createDishDescriptionSection();
 
-class MenuItem {
-	private final String name;
-	private final double price;
-	private final SimpleBooleanProperty isAvailable;
-
-	public MenuItem(String name, double price, boolean isAvailable) {
-		this.name = name;
-		this.price = price;
-		this.isAvailable = new SimpleBooleanProperty(isAvailable);
+		// Adding all sections to the HBox
+		this.getChildren().addAll(selectMenuSection, menuDescriptionSection, dishDescriptionSection);
 	}
 
-	public String getName() {
-		return name;
+	private VBox createSelectMenuSection() {
+		ListView<String> menuList = new ListView<>();
+		menuList.getItems().addAll("Winter 2023/24", "Autumn 2023", "Summer 2023", "Spring 2023");
+		menuList.setPrefHeight(150);
+		menuList.setPrefWidth(200); // Set a preferred width to match the design
+
+		Button addMenuButton = new Button("Add Menu");
+		VBox box = new VBox(5, new Label("Select Menu"), menuList, addMenuButton);
+		box.setPadding(new Insets(10));
+
+		return box;
 	}
 
-	public double getPrice() {
-		return price;
+	private VBox createMenuDescriptionSection() {
+		VBox box = new VBox(5);
+		box.setPadding(new Insets(10));
+
+		Label firstCourseLabel = new Label("First Course -");
+		ListView<String> dishesList = new ListView<>();
+		dishesList.getItems().addAll("Warm Onion Tart", "Venison Pâté en Croûte", "Lasagna of Rabbit Shoulder", "Grilled Beef Tongue");
+		dishesList.setPrefHeight(150);
+		dishesList.setPrefWidth(200); // Set a preferred width to match the design
+
+		Button addDishButton = new Button("Add Dish");
+		box.getChildren().addAll(new Label("Menu Description"), firstCourseLabel, dishesList, addDishButton);
+
+		return box;
 	}
 
-	public boolean isAvailable() {
-		return isAvailable.get();
-	}
+	private VBox createDishDescriptionSection() {
+		TextArea dishDescription = new TextArea();
+		dishDescription.setText("Name: Warm Onion Tart\nAllergens: Casein, Gluten, Alliums\nIngredients: Quickes Goats Cheese, Worcestershire, Shallots\nRecipe:\n1. [Step 1]\n2. [Step 2]\n3. [Step 3]\n4. [Step 4]\n5. [Step 5]");
+		dishDescription.setEditable(false);
+		dishDescription.setPrefHeight(150);
+		dishDescription.setPrefWidth(300); // Set a preferred width to match the design
 
-	public SimpleBooleanProperty isAvailableProperty() {
-		return isAvailable;
-	}
+		Button openMenuButton = new Button("Open Menu in new window");
+		VBox box = new VBox(5, new Label("Dish Description"), dishDescription, openMenuButton);
+		box.setPadding(new Insets(10));
 
-	public void setAvailable(boolean available) {
-		isAvailable.set(available);
+		return box;
 	}
 }
