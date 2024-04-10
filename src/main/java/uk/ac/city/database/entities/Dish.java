@@ -1,4 +1,4 @@
-package uk.ac.city.entities;
+package uk.ac.city.database.entities;
 
 import javafx.scene.image.Image;
 import java.util.HashMap;

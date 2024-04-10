@@ -1,8 +1,8 @@
 package entities;
 
-import uk.ac.city.entities.Dish;
-import uk.ac.city.entities.Ingredient;
-import uk.ac.city.entities.Order;
+import uk.ac.city.database.entities.Dish;
+import uk.ac.city.database.entities.Ingredient;
+import uk.ac.city.database.entities.Order;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import org.junit.jupiter.api.Test;

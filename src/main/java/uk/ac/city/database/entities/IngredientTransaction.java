@@ -1,4 +1,4 @@
-package uk.ac.city.entities;
+package uk.ac.city.database.entities;
 
 import java.time.LocalDateTime;
 
