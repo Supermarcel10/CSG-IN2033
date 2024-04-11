@@ -43,4 +43,9 @@ public class Menu {
 	public void removeDish(Dish dish) {
 		dishes.remove(dish);
 	}
+
+	@Override
+	public String toString() {
+		return String.format("Menu: %s - %s\nConsists of: %s", startDate, endDate, dishes);
+	}
 }

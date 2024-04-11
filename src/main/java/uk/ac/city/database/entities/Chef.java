@@ -52,4 +52,9 @@ public class Chef {
 	public void removeOrder(Order order) {
 		orders.remove(order);
 	}
+
+	@Override
+	public String toString() {
+		return name;
+	}
 }

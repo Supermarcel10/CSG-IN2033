@@ -86,4 +86,9 @@ public class Order {
 	public HashMap<Ingredient, Integer> getRequiredItems() {
 		return requiredItems;
 	}
+
+	@Override
+	public String toString() {
+		return String.format("Order %d: %s\nContains: %s\nRequires: %s", ID, orderDateTime, dishes, requiredItems);
+	}
 }

@@ -43,4 +43,9 @@ public class IngredientTransaction {
 	public TransactionType getType() {
 		return type;
 	}
+
+	@Override
+	public String toString() {
+		return String.format("[%s] %s %d %s", dateTime, type, quantity, ingredient.getName());
+	}
 }

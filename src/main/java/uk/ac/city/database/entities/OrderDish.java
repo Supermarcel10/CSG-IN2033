@@ -32,4 +32,9 @@ class OrderDish {
 	public int getQuantity() {
 		return quantity;
 	}
+
+	@Override
+	public String toString() {
+		return String.format("%s x%d", dish.getName(), quantity);
+	}
 }

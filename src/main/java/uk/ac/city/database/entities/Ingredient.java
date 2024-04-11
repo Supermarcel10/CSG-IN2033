@@ -75,4 +75,9 @@ public class Ingredient {
 	public HashSet<IngredientTransaction> getChanges() {
 		return changes;
 	}
+
+	@Override
+	public String toString() {
+		return String.format("%s (%d/%d)", name, currentQuantity, maxQuantity);
+	}
 }

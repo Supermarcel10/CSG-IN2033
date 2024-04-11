@@ -91,4 +91,9 @@ public class Dish {
 	public Image getImage() {
 		return image;
 	}
+
+	@Override
+	public String toString() {
+		return name;
+	}
 }
