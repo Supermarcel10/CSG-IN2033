@@ -22,13 +22,17 @@ public class Order {
 
 			this.dishes.add(orderDish);
 			dish.addOrder(orderDish);
-			recalculateRequiredItems(dish, false);
+			recalculateRequiredItems(dish, dishes.get(dish), false);
 		}
 	}
 
 	private void recalculateRequiredItems(Dish dish, boolean removal) {
+		recalculateRequiredItems(dish, 1, removal);
+	}
+
+	private void recalculateRequiredItems(Dish dish, int quantityOfDish, boolean removal) {
 		dish.getRequiredItems().forEach((ingredient, quantity) -> {
-			int requiredQuantity = quantity * dish.getRequiredItems().get(ingredient);
+			int requiredQuantity = quantity * quantityOfDish;
 			if (removal) requiredQuantity *= -1;
 
 			// If the item is already in the requiredItems map, add the new quantity to the existing quantity, otherwise add a new entry
