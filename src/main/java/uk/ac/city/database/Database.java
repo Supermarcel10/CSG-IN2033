@@ -18,7 +18,7 @@ class Database {
 		config.setJdbcUrl("jdbc:sqlite:" + dbUrl);
 		config.setDriverClassName("org.sqlite.JDBC");
 
-		// For when University Database gets fixed
+		// TODO: To be changed for when moving to the University Database
 		// config.setJdbcUrl("");
 		// config.setUsername("");
 		// config.setPassword("");
