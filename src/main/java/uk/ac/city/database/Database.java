@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.util.Objects;
 
 
-class Database {
+public class Database {
 	private static HikariDataSource ds;
 
 	public static void initiateDB() throws RuntimeException {
@@ -31,7 +31,7 @@ class Database {
 		ds = new HikariDataSource(config);
 	}
 
-	public static Connection getConnection() throws SQLException {
+	protected static Connection getConnection() throws SQLException {
 		return ds.getConnection();
 	}
 }
