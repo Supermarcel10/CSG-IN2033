@@ -9,6 +9,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import uk.ac.city.database.Database;
 
 import java.util.LinkedHashMap;
 import java.util.Objects;
@@ -57,6 +58,7 @@ public class Main extends Application {
 	}
 
 	public static void main(String[] args) {
+		Database.initiateDB();
 		launch();
 	}
 }
