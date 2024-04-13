@@ -10,9 +10,10 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import uk.ac.city.database.Database;
+import uk.ac.city.resource.PredefinedResources;
+import uk.ac.city.resource.ResourceLoader;
 
 import java.util.LinkedHashMap;
-import java.util.Objects;
 
 
 public class Main extends Application {
@@ -25,8 +26,7 @@ public class Main extends Application {
 
 	@Override
 	public void start(Stage primaryStage) {
-		String logoPath = "/image/logo.jpeg";
-		Image logo = new Image(Objects.requireNonNull(getClass().getResourceAsStream(logoPath)));
+		Image logo = ResourceLoader.getImageResource(PredefinedResources.LOGO);
 		primaryStage.getIcons().add(logo);
 
 	    BorderPane root = new BorderPane();
