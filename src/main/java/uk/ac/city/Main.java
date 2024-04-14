@@ -67,9 +67,7 @@ public class Main extends Application {
 		// Version label
 		Label versionLabel = new Label(String.format("v%s", version));
 		versionLabel.setTextFill(Color.WHITE);
-		versionLabel.boundsInLocalProperty().addListener((observable, oldValue, newValue) -> {
-			versionLabel.setLayoutX(sizeX - newValue.getWidth());
-		});
+		versionLabel.boundsInLocalProperty().addListener((observable, oldValue, newValue) -> versionLabel.setLayoutX(sizeX - newValue.getWidth()));
 		topBar.getChildren().add(versionLabel);
 
 		return topBar;
