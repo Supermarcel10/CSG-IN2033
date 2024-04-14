@@ -32,5 +32,8 @@ jobs:
     - name: Print module-info.java
       run: |
         cat src/main/java/module-info.java
+    - name: List target directory
+      run: |
+        ls -l target
     - name: Build with Maven
       run: mvn -B package --file pom.xml
