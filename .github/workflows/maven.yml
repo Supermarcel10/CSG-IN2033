@@ -21,19 +21,6 @@ jobs:
       with:
         java-version: '21'
         distribution: 'temurin'
-        maven-version: '3.9.2'
 
-    - name: Download JavaFX SDK
-      run: |
-        wget https://download2.gluonhq.com/openjfx/21.0.2/openjfx-21.0.2_linux-x64_bin-sdk.zip
-        unzip openjfx-21.0.2_linux-x64_bin-sdk.zip
-    - name: Set environment variable
-      run: echo "PATH_TO_FX=$(pwd)/javafx-sdk-21.0.2/lib" >> $GITHUB_ENV
     - name: Build with Maven
-      run: mvn install -Dmaven.javadoc.skip=true -B package -V --file pom.xml
-    - name: Download and install HikariCP
-      run: mvn dependency:get -Dartifact=com.zaxxer:HikariCP:5.1.0
-    - name: Download and install dom4j
-      run: mvn dependency:get -Dartifact=org.dom4j:dom4j:2.1.4
-    - name: Build with Maven
-      run: mvn install -B package -V --file pom.xml
+      run: mvn clean install -B package -V --file pom.xml
