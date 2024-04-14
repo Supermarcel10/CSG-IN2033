@@ -1,4 +1,4 @@
-module IN2033 {
+module bytebake {
 	requires javafx.controls;
 	requires javafx.fxml;
 	requires com.zaxxer.hikari;
