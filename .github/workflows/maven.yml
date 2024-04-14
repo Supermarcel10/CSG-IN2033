@@ -22,5 +22,15 @@ jobs:
         java-version: '21'
         distribution: 'temurin'
         cache: maven
+    - name: Print Maven and Java versions
+      run: |
+        mvn --version
+        java -version
+    - name: List $JAVA_HOME contents
+      run: |
+        ls -l $JAVA_HOME
+    - name: Print module-info.java
+      run: |
+        cat src/main/java/module-info.java
     - name: Build with Maven
       run: mvn -B package --file pom.xml
