@@ -6,6 +6,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import uk.ac.city.Popup;
 
 
 public class StockTab extends HBox {
@@ -71,9 +72,34 @@ public class StockTab extends HBox {
 		categoryList.setPrefWidth(200);
 
 		Button addCategoryButton = new Button("Add Category");
-		VBox box = new VBox(5, new Label("Select Category"), categoryList, addCategoryButton);
+		addCategoryButton.setOnAction(event -> handleAddCategoryButton(categoryList));
+
+		Button removeCategoryButton = new Button("Remove Category");
+		removeCategoryButton.setOnAction(event -> handleRemoveCategoryButton(categoryList));
+
+		VBox box = new VBox(5, new Label("Select Category"), categoryList, addCategoryButton, removeCategoryButton);
 		box.setPadding(new Insets(10));
 
 		return box;
+	}
+
+	private void handleAddCategoryButton(ListView<String> categoryList) {
+		String categoryName = Popup.showTextInputPopup("Enter the name of the new category");
+		if (categoryName == null || categoryName.isEmpty()) {
+			Popup.showWarningPopup("Invalid Input", "Category name cannot be empty!");
+		} else if (categoryList.getItems().contains(categoryName)) {
+			Popup.showWarningPopup("Invalid Input", "Category name already exists!");
+		} else {
+			categoryList.getItems().add(categoryName);
+		}
+	}
+
+	private void handleRemoveCategoryButton(ListView<String> categoryList) {
+		String selectedCategory = categoryList.getSelectionModel().getSelectedItem();
+		if (selectedCategory == null) {
+			Popup.showWarningPopup("Invalid Input", "Please select a category to remove!");
+		} else if (Popup.showYesNoPopup("Are you sure you want to remove this category?")) {
+			categoryList.getItems().remove(categoryList.getSelectionModel().getSelectedItem());
+		}
 	}
 }
