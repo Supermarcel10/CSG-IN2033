@@ -68,7 +68,7 @@ public class Category {
 
 	public static Category getCategory(String name) {
 		for (Category category : categories) {
-			if (category.getName().equals(name)) {
+			if (category.getName().equalsIgnoreCase(name)) {
 				return category;
 			}
 		}
