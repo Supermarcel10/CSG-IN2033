@@ -3,6 +3,7 @@ package uk.ac.city.resource;
 import javafx.scene.image.Image;
 import java.io.InputStream;
 import java.net.URL;
+import java.util.Objects;
 
 
 public class ResourceLoader {
@@ -36,5 +37,13 @@ public class ResourceLoader {
 			throw new IllegalArgumentException("Resource not found: " + path);
 		}
 		return url;
+	}
+
+	public static String getCSSFile(PredefinedResources resource) {
+		return getCSSFile(resource.getPath());
+	}
+
+	public static String getCSSFile(String path) {
+		return Objects.requireNonNull(ResourceLoader.class.getResource(path)).toExternalForm();
 	}
 }
