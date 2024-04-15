@@ -25,12 +25,22 @@ public class Category {
 	public Category(String name) {
 		this.name = name;
 
-		try (Connection conn = getConnection();
-		     PreparedStatement stmt = conn.prepareStatement("INSERT INTO Category (Name) VALUES (?)")) {
-			stmt.setString(1, name);
-			stmt.executeUpdate();
-		} catch (SQLException e) {
-			e.printStackTrace();
+		boolean createCategory = true;
+		for (Category category : categories) {
+			if (category.getName().equals(name)) {
+				createCategory = false;
+				break;
+			}
+		}
+
+		if (createCategory) {
+			try (Connection conn = getConnection();
+			     PreparedStatement stmt = conn.prepareStatement("INSERT INTO Category (Name) VALUES (?)")) {
+				stmt.setString(1, name);
+				stmt.executeUpdate();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 
 		categories.add(this);
@@ -59,6 +69,16 @@ public class Category {
 	public static Category getCategory(String name) {
 		for (Category category : categories) {
 			if (category.getName().equals(name)) {
+				return category;
+			}
+		}
+
+		return null;
+	}
+
+	public static Category getCategoryByID(int ID) {
+		for (Category category : categories) {
+			if (category.getID() == ID) {
 				return category;
 			}
 		}
