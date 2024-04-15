@@ -11,10 +11,14 @@ import javafx.scene.layout.VBox;
 import uk.ac.city.Popup;
 import uk.ac.city.Utils;
 import uk.ac.city.database.entities.Category;
+import uk.ac.city.database.entities.Ingredient;
+
 import java.util.stream.Collectors;
 
 
 public class StockTab extends HBox {
+	ListView<String> categoryList;
+
 	public StockTab() {
 		this.setSpacing(10);
 		this.setPadding(new Insets(10));
@@ -59,12 +63,23 @@ public class StockTab extends HBox {
 		VBox box = new VBox(5);
 		box.setPadding(new Insets(10));
 
+		// Create a list of ingredients
 		ListView<String> ingredientList = new ListView<>();
-		ingredientList.getItems().addAll("Shallots", "Mustard Fruit", "Thyme", "Quince", "Beetroot", "Spring Onion");
+
+		ObservableList<String> ingredientNames = FXCollections.observableArrayList(
+			Ingredient.getAllIngredients().stream()
+				.map(Ingredient::getName)
+				.map(Utils::toSentenceCase)
+				.collect(Collectors.toList())
+		);
+
+		ingredientList.setItems(ingredientNames);
 		ingredientList.setPrefHeight(150);
 		ingredientList.setPrefWidth(200);
 
 		Button addNewIngredientButton = new Button("New ingredient");
+		addNewIngredientButton.setOnAction(event -> handleAddIngredientButton(ingredientList));
+
 		box.getChildren().addAll(new Label("Ingredient List"), ingredientList, addNewIngredientButton);
 
 		return box;
@@ -72,7 +87,7 @@ public class StockTab extends HBox {
 
 	private VBox createSelectCategorySection() {
 		// Create a list of categories
-		ListView<String> categoryList = new ListView<>();
+		categoryList = new ListView<>();
 
 		ObservableList<String> categoryNames = FXCollections.observableArrayList(
 			Category.getAllCategories().stream()
@@ -80,8 +95,8 @@ public class StockTab extends HBox {
 				.map(Utils::toSentenceCase)
 				.collect(Collectors.toList())
 		);
-		categoryList.setItems(categoryNames);
 
+		categoryList.setItems(categoryNames);
 		categoryList.setPrefHeight(150);
 		categoryList.setPrefWidth(200);
 
@@ -95,6 +110,20 @@ public class StockTab extends HBox {
 		box.setPadding(new Insets(10));
 
 		return box;
+	}
+
+	private void handleAddIngredientButton(ListView<String> ingredientList) {
+		String ingredientName = Popup.showTextInputPopup("Enter the name of the new ingredient");
+		if (ingredientName == null || ingredientName.isEmpty()) {
+			Popup.showWarningPopup("Invalid Input", "Ingredient name cannot be empty!");
+		} else if (ingredientList.getItems().contains(ingredientName.toLowerCase())) {
+			Popup.showWarningPopup("Invalid Input", "Ingredient name already exists!");
+		} else {
+			ingredientList.getItems().add(ingredientName);
+			System.out.println(categoryList.getSelectionModel().getSelectedItem().toLowerCase());
+			System.out.println(Category.getCategory(categoryList.getSelectionModel().getSelectedItem().toLowerCase()));
+			new Ingredient(ingredientName.toLowerCase(), Category.getCategory(categoryList.getSelectionModel().getSelectedItem().toLowerCase()));
+		}
 	}
 
 	private void handleAddCategoryButton(ListView<String> categoryList) {
@@ -115,7 +144,7 @@ public class StockTab extends HBox {
 			Popup.showWarningPopup("Invalid Input", "Please select a category to remove!");
 		} else if (Popup.showYesNoPopup("Are you sure you want to remove this category?")) {
 			categoryList.getItems().remove(categoryList.getSelectionModel().getSelectedItem());
-			Category.deleteCategory(selectedCategory);
+			Category.deleteCategory(selectedCategory.toLowerCase());
 		}
 	}
 }
