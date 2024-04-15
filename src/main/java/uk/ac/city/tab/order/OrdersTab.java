@@ -1,5 +1,6 @@
 package uk.ac.city.tab.order;
 
+import javafx.geometry.Insets;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.*;
 import uk.ac.city.resource.ResourceLoader;
@@ -10,43 +11,21 @@ public class OrdersTab extends BorderPane {
 	protected static HBox pane;
 
 	public OrdersTab() {
-		// Left side
-		ScrollPane left = handleLeft();
-		setLeft(left);
+		pane = new HBox();
+		pane.setSpacing(10);
 
-		// Right side
-		VBox right = handleRight();
-		setRight(right);
+		ScrollPane scrollPane = new ScrollPane(pane);
+		scrollPane.setPadding(new Insets(10));
+		scrollPane.setStyle("-fx-background-color: #C5C5C5;");
+		scrollPane.getStylesheets().add(ResourceLoader.getCSSFile("/styles/scrollpane.css"));
+		scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
+		scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+		setLeft(scrollPane);
 
-		boundsInLocalProperty().addListener((observable, oldValue, newValue) -> {
-			left.setPrefWidth((getWidth() * 3) / 4);
-			right.setPrefWidth((getWidth() * 1) / 4);
-		});
+		boundsInLocalProperty().addListener((observable, oldValue, newValue) -> scrollPane.setPrefSize(getWidth(), getHeight()));
 
 		// Start handling orders
 		orderHandler = new OrderHandler();
 		orderHandler.run();
-	}
-
-	private ScrollPane handleLeft() {
-		pane = new HBox();
-		pane.setSpacing(10);
-
-		ScrollPane left = new ScrollPane(pane);
-		left.setPrefWidth((getWidth() * 3) / 4);
-		left.setPrefHeight(getHeight());
-		left.setStyle("-fx-background-color: #C5C5C5;");
-		left.getStylesheets().add(ResourceLoader.getCSSFile("/styles/scrollpane.css"));
-		left.setHbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
-		left.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-
-		return left;
-	}
-
-	private VBox handleRight() {
-		VBox right = new VBox();
-		right.setStyle("-fx-background-color: #C5C5C5; -fx-border-color: #B8B8B8; -fx-border-width: .1em; -fx-border-style: hidden hidden hidden solid;");
-
-		return right;
 	}
 }
