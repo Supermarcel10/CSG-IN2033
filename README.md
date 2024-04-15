@@ -6,18 +6,12 @@ As part of this project, we are developing a terminal system for the Kitchen sid
 
 ## Running / Building
 ### Running the project
-**To run the project on IntelliJ you can run the `Run` configuration.**
-
-Alternatively you can run the following commands:
-```bash
-mvn clean javafx:run
-```
+**To run the project on IntelliJ you can run the provided `Run` configuration.**
 
 ### Building the project
 **To build the project on IntelliJ you can run the `Build` configuration.**
 
 Alternatively you can run the following commands:
 ```bash
-mvn clean install
-mvn package
+mvn clean install package
 ```
