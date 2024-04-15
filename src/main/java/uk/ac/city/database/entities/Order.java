@@ -24,6 +24,9 @@ public class Order {
 			dish.addOrder(orderDish);
 			recalculateRequiredItems(dish, dishes.get(dish), false);
 		}
+
+		// Remove ingredients from stock
+		requiredItems.forEach(Ingredient::decreaseQuantity);
 	}
 
 	private void recalculateRequiredItems(Dish dish, boolean removal) {
@@ -85,6 +88,10 @@ public class Order {
 
 	public HashMap<Ingredient, Integer> getRequiredItems() {
 		return requiredItems;
+	}
+
+	public void dismissOrder() {
+		requiredItems.forEach(Ingredient::increaseQuantity);
 	}
 
 	@Override

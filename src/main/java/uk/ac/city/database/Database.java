@@ -2,7 +2,8 @@ package uk.ac.city.database;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
-
+import uk.ac.city.database.entities.Category;
+import uk.ac.city.database.entities.Ingredient;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Objects;
@@ -29,9 +30,16 @@ public class Database {
 		// config.addDataSourceProperty("prepStmtCacheSqlLimit", "2048");
 
 		ds = new HikariDataSource(config);
+
+		cache();
 	}
 
-	protected static Connection getConnection() throws SQLException {
+	private static void cache() {
+		Category.cacheAll();
+		Ingredient.cacheAll();
+	}
+
+	public static Connection getConnection() throws SQLException {
 		return ds.getConnection();
 	}
 }
