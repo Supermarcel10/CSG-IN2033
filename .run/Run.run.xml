@@ -1,10 +1,10 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="Run" type="Application" factoryName="Application">
     <option name="MAIN_CLASS_NAME" value="uk.ac.city.Main" />
-    <module name="IN2033" />
+    <module name="bytebake" />
     <extension name="coverage">
       <pattern>
-        <option name="PATTERN" value="uk.ac.city.*" />
+        <option name="PATTERN" value="uk.ac.city" />
         <option name="ENABLED" value="true" />
       </pattern>
     </extension>
