@@ -1,4 +1,4 @@
-package uk.ac.city;
+package uk.ac.city.tab.menu;
 
 import javafx.application.Platform;
 import javafx.collections.FXCollections;

@@ -31,7 +31,7 @@ public class Database {
 		ds = new HikariDataSource(config);
 	}
 
-	public static Connection getConnection() throws SQLException {
+	protected static Connection getConnection() throws SQLException {
 		return ds.getConnection();
 	}
 }
