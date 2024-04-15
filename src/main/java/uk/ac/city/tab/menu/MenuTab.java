@@ -1,4 +1,4 @@
-package uk.ac.city;
+package uk.ac.city.tab.menu;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;

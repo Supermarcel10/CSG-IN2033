@@ -15,6 +15,7 @@ import org.dom4j.io.SAXReader;
 import uk.ac.city.database.Database;
 import uk.ac.city.resource.PredefinedResources;
 import uk.ac.city.resource.ResourceLoader;
+import uk.ac.city.tab.menu.MenuTab;
 import uk.ac.city.tab.order.OrdersTab;
 import uk.ac.city.tab.stock.StockTab;
 
