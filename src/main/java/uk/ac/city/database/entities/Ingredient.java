@@ -6,19 +6,22 @@ import java.util.HashSet;
 public class Ingredient {
 	private int ID;
 	private final String name;
+	private Category category;
 	private int currentQuantity;
 	private int maxQuantity;
 	private final HashSet<DishRequiredIngredients> dishesUsing = new HashSet<>();
 	private final HashSet<IngredientTransaction> changes = new HashSet<>();
 
-	public Ingredient(String name, int maxQuantity) {
+	public Ingredient(String name, Category category, int maxQuantity) {
 		this.name = name;
+		this.category = category;
 		this.maxQuantity = maxQuantity;
 		this.currentQuantity = 0;
 	}
 
-	public Ingredient(String name) {
+	public Ingredient(String name, Category category) {
 		this.name = name;
+		this.category = category;
 		this.maxQuantity = 0;
 		this.currentQuantity = 0;
 	}
@@ -29,6 +32,10 @@ public class Ingredient {
 
 	public String getName() {
 		return name;
+	}
+
+	public Category getCategory() {
+		return category;
 	}
 
 	public int getCurrentQuantity() {
