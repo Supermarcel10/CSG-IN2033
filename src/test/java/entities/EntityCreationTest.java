@@ -1,5 +1,6 @@
 package entities;
 
+import uk.ac.city.database.entities.Category;
 import uk.ac.city.database.entities.Dish;
 import uk.ac.city.database.entities.Ingredient;
 import uk.ac.city.database.entities.Order;
@@ -34,12 +35,22 @@ public class EntityCreationTest {
 
 	@Test
 	public void testOrderCreation() {
+		// Categories
+		Category baking = new Category("Baking");
+		Category vegetables = new Category("Vegetables");
+		Category dairy = new Category("Dairy");
+
 		// Ingredients
-		Ingredient flour = new Ingredient("Flour");
-		Ingredient tomato = new Ingredient("Tomato");
-		Ingredient cheese = new Ingredient("Cheese");
-		Ingredient sugar = new Ingredient("Sugar");
-		Ingredient milk = new Ingredient("Milk");
+		Ingredient flour = new Ingredient("Flour", baking);
+		flour.setCurrentQuantity(100);
+		Ingredient tomato = new Ingredient("Tomato", vegetables);
+		tomato.setCurrentQuantity(50);
+		Ingredient cheese = new Ingredient("Cheese", dairy);
+		cheese.setCurrentQuantity(30);
+		Ingredient sugar = new Ingredient("Sugar", baking);
+		sugar.setCurrentQuantity(20);
+		Ingredient milk = new Ingredient("Milk", dairy);
+		milk.setCurrentQuantity(40);
 
 		// Dishes
 		Dish pancakes = new Dish("Pancakes");
