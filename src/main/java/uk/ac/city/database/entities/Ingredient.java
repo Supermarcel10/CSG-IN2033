@@ -36,7 +36,27 @@ public class Ingredient {
 	}
 
 	public void setCurrentQuantity(int currentQuantity) {
+		if (this.currentQuantity - currentQuantity < 0) {
+			throw new IllegalArgumentException("Cannot decrease quantity below 0!");
+		}
+
 		this.currentQuantity = currentQuantity;
+	}
+
+	public void increaseQuantity(int quantity) {
+		if (this.currentQuantity - quantity < 0) {
+			throw new IllegalArgumentException("Cannot decrease quantity below 0!");
+		}
+
+		this.currentQuantity += quantity;
+	}
+
+	public void decreaseQuantity(int quantity) {
+		if (this.currentQuantity - quantity < 0) {
+			throw new IllegalArgumentException("Cannot decrease quantity below 0!");
+		}
+
+		this.currentQuantity -= quantity;
 	}
 
 	public int getMaxQuantity() {
@@ -44,6 +64,10 @@ public class Ingredient {
 	}
 
 	public void setMaxQuantity(int maxQuantity) {
+		if (maxQuantity < 0) {
+			throw new IllegalArgumentException("Cannot set max quantity below 0!");
+		}
+
 		this.maxQuantity = maxQuantity;
 	}
 
