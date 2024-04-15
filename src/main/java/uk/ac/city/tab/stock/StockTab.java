@@ -7,6 +7,9 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import uk.ac.city.Popup;
+import uk.ac.city.Utils;
+import uk.ac.city.database.entities.Category;
+import java.util.stream.Collectors;
 
 
 public class StockTab extends HBox {
@@ -66,8 +69,17 @@ public class StockTab extends HBox {
 	}
 
 	private VBox createSelectCategorySection() {
+		// Create a list of categories
 		ListView<String> categoryList = new ListView<>();
-		categoryList.getItems().addAll("Fruit & Veg", "Dry Fruits", "Carbohydrates", "Meats", "Dairy", "Herbs & Spices", "Others");
+
+		ObservableList<String> categoryNames = FXCollections.observableArrayList(
+			Category.getAllCategories().stream()
+				.map(Category::getName)
+				.map(Utils::toSentenceCase)
+				.collect(Collectors.toList())
+		);
+		categoryList.setItems(categoryNames);
+
 		categoryList.setPrefHeight(150);
 		categoryList.setPrefWidth(200);
 
@@ -87,10 +99,11 @@ public class StockTab extends HBox {
 		String categoryName = Popup.showTextInputPopup("Enter the name of the new category");
 		if (categoryName == null || categoryName.isEmpty()) {
 			Popup.showWarningPopup("Invalid Input", "Category name cannot be empty!");
-		} else if (categoryList.getItems().contains(categoryName)) {
+		} else if (categoryList.getItems().contains(categoryName.toLowerCase())) {
 			Popup.showWarningPopup("Invalid Input", "Category name already exists!");
 		} else {
 			categoryList.getItems().add(categoryName);
+			new Category(categoryName.toLowerCase());
 		}
 	}
 
@@ -100,6 +113,7 @@ public class StockTab extends HBox {
 			Popup.showWarningPopup("Invalid Input", "Please select a category to remove!");
 		} else if (Popup.showYesNoPopup("Are you sure you want to remove this category?")) {
 			categoryList.getItems().remove(categoryList.getSelectionModel().getSelectedItem());
+			Category.deleteCategory(selectedCategory);
 		}
 	}
 }

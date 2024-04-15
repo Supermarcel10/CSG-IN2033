@@ -27,12 +27,6 @@ public class Main extends Application {
 	private static final Image logo = ResourceLoader.getImageResource(PredefinedResources.LOGO);
 	private static final LinkedHashMap<String, Pane> tabs = new LinkedHashMap<>();
 
-	static {
-		tabs.put("Orders", new OrdersTab());
-		tabs.put("Menu", new MenuTab());
-		tabs.put("Stock", new StockTab());
-	}
-
 	protected static int sizeX = 800; // TODO: Make this dynamic
 	protected static int sizeY = 600; // TODO: Make this dynamic
 
@@ -83,6 +77,10 @@ public class Main extends Application {
 
 		// TODO: Center the tabs
 		// TODO: Change the colors of the background tab ribbon
+
+		tabs.put("Orders", new OrdersTab());
+		tabs.put("Menu", new MenuTab());
+		tabs.put("Stock", new StockTab());
 
 		tabPane.getTabs().addAll(
 			tabs.keySet().stream()
