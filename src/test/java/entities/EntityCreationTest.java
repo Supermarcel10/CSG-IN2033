@@ -1,5 +1,6 @@
 package entities;
 
+import uk.ac.city.database.Database;
 import uk.ac.city.database.entities.Category;
 import uk.ac.city.database.entities.Dish;
 import uk.ac.city.database.entities.Ingredient;
@@ -35,6 +36,8 @@ public class EntityCreationTest {
 
 	@Test
 	public void testOrderCreation() {
+		Database.initiateDB();
+
 		// Categories
 		Category baking = new Category("Baking");
 		Category vegetables = new Category("Vegetables");
