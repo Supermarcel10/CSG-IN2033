@@ -22,7 +22,7 @@ import java.util.LinkedHashMap;
 public class Main extends Application {
 	private static final String version = getProjectVersion();
 	private static final Image logo = ResourceLoader.getImageResource(PredefinedResources.LOGO);
-	private static final LinkedHashMap<String, VBox> tabs = new LinkedHashMap<>();
+	private static final LinkedHashMap<String, Pane> tabs = new LinkedHashMap<>();
 
 	static {
 		tabs.put("Orders", new OrdersTab());
