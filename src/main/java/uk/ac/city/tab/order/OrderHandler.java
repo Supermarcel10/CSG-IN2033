@@ -1,5 +1,6 @@
 package uk.ac.city.tab.order;
 
+import uk.ac.city.database.entities.Category;
 import uk.ac.city.database.entities.Dish;
 import uk.ac.city.database.entities.Ingredient;
 import uk.ac.city.database.entities.Order;
@@ -16,16 +17,21 @@ public class OrderHandler implements Runnable {
 	@Override
 	public void run() {
 		// Add some sample active orders
+		// Categories
+		Category baking = new Category("Baking");
+		Category vegetables = new Category("Vegetables");
+		Category dairy = new Category("Dairy");
+
 		// Ingredients
-		Ingredient flour = new Ingredient("Flour");
+		Ingredient flour = new Ingredient("Flour", baking);
 		flour.setCurrentQuantity(100);
-		Ingredient tomato = new Ingredient("Tomato");
+		Ingredient tomato = new Ingredient("Tomato", vegetables);
 		tomato.setCurrentQuantity(50);
-		Ingredient cheese = new Ingredient("Cheese");
+		Ingredient cheese = new Ingredient("Cheese", dairy);
 		cheese.setCurrentQuantity(30);
-		Ingredient sugar = new Ingredient("Sugar");
+		Ingredient sugar = new Ingredient("Sugar", baking);
 		sugar.setCurrentQuantity(20);
-		Ingredient milk = new Ingredient("Milk");
+		Ingredient milk = new Ingredient("Milk", dairy);
 		milk.setCurrentQuantity(40);
 
 		// Dishes
@@ -44,11 +50,12 @@ public class OrderHandler implements Runnable {
 		orderItems.put(pancakes, 1);
 		orderItems.put(pizza, 2);
 
+		HashMap<Dish, Integer> orderItems2 = new HashMap<>();
+		orderItems2.put(pancakes, 2);
+		orderItems2.put(pizza, 1);
+
 		addOrder(new OrderDisplay(new Order(LocalDateTime.now(), 1, orderItems)));
-		addOrder(new OrderDisplay(new Order(LocalDateTime.now(), 2, orderItems)));
-		addOrder(new OrderDisplay(new Order(LocalDateTime.now(), 3, orderItems)));
-		addOrder(new OrderDisplay(new Order(LocalDateTime.now(), 4, orderItems)));
-		addOrder(new OrderDisplay(new Order(LocalDateTime.now(), 5, orderItems)));
+		addOrder(new OrderDisplay(new Order(LocalDateTime.now(), 2, orderItems2)));
 
 		// TODO: Implement waiting forever for orders until shutdown.
 	}
