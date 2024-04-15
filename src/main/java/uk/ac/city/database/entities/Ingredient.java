@@ -36,16 +36,16 @@ public class Ingredient {
 	}
 
 	public void setCurrentQuantity(int currentQuantity) {
-		if (this.currentQuantity - currentQuantity < 0) {
-			throw new IllegalArgumentException("Cannot decrease quantity below 0!");
+		if (this.currentQuantity + currentQuantity < 0) {
+			throw new IllegalArgumentException(String.format("Cannot decrease %s quantity below 0!", name));
 		}
 
 		this.currentQuantity = currentQuantity;
 	}
 
 	public void increaseQuantity(int quantity) {
-		if (this.currentQuantity - quantity < 0) {
-			throw new IllegalArgumentException("Cannot decrease quantity below 0!");
+		if (this.currentQuantity + quantity < 0) {
+			throw new IllegalArgumentException(String.format("Cannot decrease %s quantity below 0!", name));
 		}
 
 		this.currentQuantity += quantity;
@@ -53,7 +53,7 @@ public class Ingredient {
 
 	public void decreaseQuantity(int quantity) {
 		if (this.currentQuantity - quantity < 0) {
-			throw new IllegalArgumentException("Cannot decrease quantity below 0!");
+			throw new IllegalArgumentException(String.format("Cannot decrease %s quantity below 0!", name));
 		}
 
 		this.currentQuantity -= quantity;
