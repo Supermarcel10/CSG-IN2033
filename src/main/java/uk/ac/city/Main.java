@@ -16,6 +16,7 @@ import uk.ac.city.database.Database;
 import uk.ac.city.resource.PredefinedResources;
 import uk.ac.city.resource.ResourceLoader;
 import uk.ac.city.tab.order.OrdersTab;
+import uk.ac.city.tab.stock.StockTab;
 
 import java.io.File;
 import java.util.LinkedHashMap;
