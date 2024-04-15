@@ -15,6 +15,8 @@ import org.dom4j.io.SAXReader;
 import uk.ac.city.database.Database;
 import uk.ac.city.resource.PredefinedResources;
 import uk.ac.city.resource.ResourceLoader;
+import uk.ac.city.tab.order.OrdersTab;
+
 import java.io.File;
 import java.util.LinkedHashMap;
 
@@ -31,7 +33,7 @@ public class Main extends Application {
 	}
 
 	protected static int sizeX = 800; // TODO: Make this dynamic
-	protected static int sizeY = 800; // TODO: Make this dynamic
+	protected static int sizeY = 600; // TODO: Make this dynamic
 
 	@Override
 	public void start(Stage primaryStage) {
