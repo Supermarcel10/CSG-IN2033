@@ -16,7 +16,25 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class EntityCreationTest {
 	@Test
 	public void testIngredientCreation() {
-		// TODO: Implement test
+		Database.initiateDB();
+
+		Category baking = new Category("Baking");
+
+		// Create ingredients
+		Ingredient flour = new Ingredient("Flour", baking);
+		flour.setCurrentQuantity(10);
+
+		Ingredient sugar = new Ingredient("Sugar", baking);
+		sugar.setCurrentQuantity(5);
+
+		// Assert ingredient properties
+		assertEquals("Flour", flour.getName());
+		assertEquals(baking, flour.getCategory());
+		assertEquals(10, flour.getCurrentQuantity());
+
+		assertEquals("Sugar", sugar.getName());
+		assertEquals(baking, sugar.getCategory());
+		assertEquals(5, sugar.getCurrentQuantity());
 	}
 
 	@Test
@@ -26,7 +44,33 @@ public class EntityCreationTest {
 
 	@Test
 	public void testDishCreation() {
-		// TODO: Implement test
+		Database.initiateDB();
+
+		// Create categories
+		Category baking = new Category("Baking");
+		Category vegetables = new Category("Vegetables");
+		Category dairy = new Category("Dairy");
+
+		// Create ingredients
+		Ingredient flour = new Ingredient("Flour", baking);
+		Ingredient tomato = new Ingredient("Tomato", vegetables);
+		Ingredient cheese = new Ingredient("Cheese", dairy);
+
+		// Create dish
+		Dish pizza = new Dish("Pizza");
+		pizza.addItem(flour, 2);
+		pizza.addItem(tomato, 1);
+		pizza.addItem(cheese, 1);
+
+		// Access dish's items directly
+		Map<Ingredient, Integer> items = pizza.getRequiredItems();
+
+		// Assert dish properties
+		assertEquals("Pizza", pizza.getName());
+		assertEquals(3, items.size()); // 3 ingredients added
+		assertEquals(2, items.get(flour).intValue()); // 2 units of flour
+		assertEquals(1, items.get(tomato).intValue()); // 1 unit of tomato
+		assertEquals(1, items.get(cheese).intValue()); // 1 unit of cheese
 	}
 
 	@Test
