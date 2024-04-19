@@ -8,9 +8,16 @@ import java.sql.SQLException;
 import java.util.Objects;
 
 
+/**
+ * Database initialiser class to handle the connection to the database
+ */
 public class Database {
 	private static HikariDataSource ds;
 
+	/**
+	 * Initiates the database connection.
+	 * @throws RuntimeException if the database connection fails.
+	 */
 	public static void initiateDB() throws RuntimeException {
 		HikariConfig config = new HikariConfig();
 
@@ -31,6 +38,11 @@ public class Database {
 		ds = new HikariDataSource(config);
 	}
 
+	/**
+	 * Returns a connection to the database.
+	 * @return a connection to the database.
+	 * @throws SQLException if the connection to the database fails.
+	 */
 	public static Connection getConnection() throws SQLException {
 		return ds.getConnection();
 	}

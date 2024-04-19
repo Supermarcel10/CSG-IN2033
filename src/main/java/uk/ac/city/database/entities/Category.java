@@ -9,12 +9,23 @@ import java.util.HashSet;
 import static uk.ac.city.database.Database.getConnection;
 
 
+/**
+ * Represents an item category entity in the system.
+ */
 public class Category {
+	/**
+	 * A set of all categories locally cached in the system.
+	 */
 	protected static HashSet<Category> categories = new HashSet<>();
 
 	private int ID;
 	private final String name;
 
+	/**
+	 * Loads a category entity from the database.
+	 * @param ID The category's ID.
+	 * @param name The category's name.
+	 */
 	public Category(int ID, String name) {
 		this.ID = ID;
 		this.name = name;
@@ -22,6 +33,10 @@ public class Category {
 		categories.add(this);
 	}
 
+	/**
+	 * Creates a new category entity and caches it.
+	 * @param name The category's name.
+	 */
 	public Category(String name) {
 		this.name = name;
 
@@ -46,14 +61,25 @@ public class Category {
 		categories.add(this);
 	}
 
+	/**
+	 * Gets the category's ID.
+	 * @return The category's ID.
+	 */
 	public int getID() {
 		return ID;
 	}
 
+	/**
+	 * Gets the category's name.
+	 * @return The category's name.
+	 */
 	public String getName() {
 		return name;
 	}
 
+	/**
+	 * Caches all categories from the database locally in memory.
+	 */
 	public static void cacheAll() {
 		try (Connection conn = getConnection();
 		     PreparedStatement stmt = conn.prepareStatement("SELECT * FROM Category");
@@ -66,6 +92,11 @@ public class Category {
 		}
 	}
 
+	/**
+	 * Gets a category entity by its name.
+	 * @param name The category's name.
+	 * @return The category entity, or null if not found.
+	 */
 	public static Category getCategory(String name) {
 		for (Category category : categories) {
 			if (category.getName().equalsIgnoreCase(name)) {
@@ -76,6 +107,11 @@ public class Category {
 		return null;
 	}
 
+	/**
+	 * Gets a category entity by its ID.
+	 * @param ID The category's ID.
+	 * @return The category entity, or null if not found.
+	 */
 	public static Category getCategoryByID(int ID) {
 		for (Category category : categories) {
 			if (category.getID() == ID) {
@@ -86,10 +122,18 @@ public class Category {
 		return null;
 	}
 
+	/**
+	 * Gets all categories cached in memory.
+	 * @return A set of all categories.
+	 */
 	public static HashSet<Category> getAllCategories() {
 		return categories;
 	}
 
+	/**
+	 * Deletes a category entity by its name.
+	 * @param name The category's name.
+	 */
 	public static void deleteCategory(String name) {
 		for (Category category : categories) {
 			if (category.getName().equals(name)) {
@@ -99,6 +143,10 @@ public class Category {
 		}
 	}
 
+	/**
+	 * Deletes a category entity by its object.
+	 * @param category The category entity to delete.
+	 */
 	public static void deleteCategory(Category category) {
 		try (Connection conn = getConnection();
 		     PreparedStatement stmt = conn.prepareStatement("DELETE FROM Category WHERE ID = ?")) {

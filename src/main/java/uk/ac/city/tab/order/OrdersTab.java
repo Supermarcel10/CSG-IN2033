@@ -6,10 +6,17 @@ import javafx.scene.layout.*;
 import uk.ac.city.resource.ResourceLoader;
 
 
+/**
+ * The OrdersTab class is a custom JavaFX component that represents the Orders tab in the main application window.
+ * It displays all the active orders in the system using a horizontal scrollable pane.
+ */
 public class OrdersTab extends BorderPane {
 	protected static OrderHandler orderHandler;
 	protected static HBox pane;
 
+	/**
+	 * Creates a new OrdersTab object.
+	 */
 	public OrdersTab() {
 		pane = new HBox();
 		pane.setSpacing(10);

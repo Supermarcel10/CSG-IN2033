@@ -1,7 +1,15 @@
 package uk.ac.city;
 
 
+/**
+ * Utility class for common operations.
+ */
 public class Utils {
+	/**
+	 * Converts the first character of each word in the input string to uppercase.
+	 * @param input The input string.
+	 * @return The input string with the first character of each word in uppercase.
+	 */
 	public static String toSentenceCase(String input) {
 		if (input == null || input.isEmpty()) {
 			return input;

@@ -22,6 +22,11 @@ import java.util.*;
 import java.util.stream.Collectors;
 import uk.ac.city.database.Database;
 
+
+/**
+ * Custom JavaFX tab for managing menus and dishes.
+ * It provides a user interface for adding, removing, and viewing menus and dishes.
+ */
 public class MenuTab extends HBox {
 
 	private Map<String, Map<String, List<String>>> menus;
@@ -30,6 +35,9 @@ public class MenuTab extends HBox {
 	private TextArea dishDescriptionTextArea;
 	private DatePicker createdDatePicker;
 
+	/**
+	 * Creates a new MenuTab instance.
+	 */
 	public MenuTab() {
 		this.setSpacing(10);
 		this.setPadding(new Insets(10));
@@ -53,7 +61,9 @@ public class MenuTab extends HBox {
 		selectMostRecentMenu();
 	}
 
-	// Assume this method is called to load initial data into the application
+	/**
+	 * Loads initial data for the menu tab.
+	 */
 	private void loadInitialData() {
 		// Dummy data for illustration purposes
 		List<String> winterDishes = Arrays.asList("Warm Onion Tart", "Venison Pâté en Croûte");
@@ -70,23 +80,30 @@ public class MenuTab extends HBox {
 		updateMenuListView();
 	}
 
-	// Refreshes the ListView with menu names
+
+	/**
+	 * Updates the menu list view with the current menu names.
+	 */
 	private void updateMenuListView() {
 		ObservableList<String> menuNames = FXCollections.observableArrayList(menus.keySet());
 		menuListView.setItems(menuNames);
 	}
 
-	// Selects the most recent menu in the ListView
+	/**
+	 * Selects the most recent menu in the ListView
+	 */
 	private void selectMostRecentMenu() {
 		if (!menus.isEmpty()) {
-			String mostRecentMenu = menus.keySet().iterator().next(); // Assuming a sorted map
+			String mostRecentMenu = menus.keySet().iterator().next();
 			menuListView.getSelectionModel().select(mostRecentMenu);
 			updateMenuDescription(mostRecentMenu);
 		}
 	}
 
-	// Updates the menu description section based on the selected menu
-	// Updates the menu description section based on the selected menu
+	/**
+	 * Updates the menu description section based on the selected menu
+	 * @param menuName the name of the selected menu
+	 */
 	private void updateMenuDescription(String menuName) {
 		menuDescriptionSection.getChildren().clear(); // Clear previous details
 
@@ -173,7 +190,12 @@ public class MenuTab extends HBox {
 
 	}
 
-
+	/**
+	 * Shows a confirmation alert dialog with the specified title and content.
+	 * @param title the title of the alert
+	 * @param content the content of the alert
+	 * @return true if the user confirms the action, false otherwise
+	 */
 	private boolean showConfirmationAlert(String title, String content) {
 		Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
 		alert.setTitle(title);
@@ -200,10 +222,11 @@ public class MenuTab extends HBox {
 		}
 	}
 
-
-
-	// This function will be called to add a dish to a course
-	// This function will be called to add a dish to a course
+	/**
+	 * Adds a new dish to the specified course in the menu.
+	 * @param menuName the name of the menu
+	 * @param courseName the name of the course
+	 */
 	private void addDishToCourse(String menuName, String courseName) {
 		Dialog<Map<String, String>> dialog = new Dialog<>();
 		dialog.setTitle("Add New Dish");
@@ -234,6 +257,10 @@ public class MenuTab extends HBox {
 		});
 	}
 
+	/**
+	 * Sets up the grid for the dish dialog.
+	 * @return the grid pane with the input fields
+	 */
 	private GridPane setupDishDialogGrid() {
 		GridPane grid = new GridPane();
 		grid.setHgap(10);
@@ -251,6 +278,11 @@ public class MenuTab extends HBox {
 		return grid;
 	}
 
+	/**
+	 * Extracts the dish details from the dialog grid.
+	 * @param grid the grid pane containing the input fields
+	 * @return a map of dish details
+	 */
 	private Map<String, String> extractDishDetailsFromDialog(GridPane grid) {
 		Map<String, String> details = new HashMap<>();
 		details.put("name", ((TextField) grid.getChildren().get(1)).getText());
@@ -260,6 +292,11 @@ public class MenuTab extends HBox {
 		return details;
 	}
 
+	/**
+	 * Inserts the dish details into the database.
+	 * @param dishDetails the details of the dish to be inserted
+	 * @throws SQLException if an error occurs while inserting the dish
+	 */
 	private void insertDishIntoDatabase(Map<String, String> dishDetails) throws SQLException {
 		String sql = "INSERT INTO dishes (name, allergens, ingredients, recipe) VALUES (?, ?, ?, ?)";
 		try (Connection conn = Database.getConnection();
@@ -272,22 +309,21 @@ public class MenuTab extends HBox {
 		}
 	}
 
-	// This method needs to be implemented to handle adding the dish details to the menu structure.
+	/**
+	 * Adds the dish details to the specified course in the menu.
+	 * @param menuName the name of the menu
+	 * @param courseName the name of the course
+	 * @param dishDetails the details of the dish to be added
+	 */
 	private void addDishDetailsToCourse(String menuName, String courseName, Map<String, String> dishDetails) {
-		// Here you will add the dish to the menu data structure
-		// This is just an example, you'll need to adjust based on your actual data structure
 		String dishName = dishDetails.get("name");
-		// The details should be saved in a way that they can be retrieved later, not just the name
 		menus.get(menuName).computeIfAbsent(courseName, k -> new ArrayList<>()).add(dishName);
-		// Possibly save the dish details to a dish object or map
-		// saveDishDetails(dishName, dishDetails);
 	}
 
-
-
-	// Updates the dish description section based on the selected dish
-
-
+	/**
+	 * Creates the menu list section with the list of menus.
+	 * @return the VBox containing the menu list section
+	 */
 	private VBox createMenuListSection() {
 		VBox section = new VBox(5);
 		section.setPadding(new Insets(10));
@@ -305,7 +341,10 @@ public class MenuTab extends HBox {
 		return section;
 	}
 
-
+	/**
+	 * Creates the dish description section with the details of the selected dish.
+	 * @return the VBox containing the dish description section
+	 */
 	private VBox createDishDescriptionSection() {
 		VBox section = new VBox(5);
 		section.setPadding(new Insets(10));
@@ -326,13 +365,12 @@ public class MenuTab extends HBox {
 		return section;
 	}
 
-
-
-// ... continuation of the MenuTab class
-
-
-
-	// Removes a dish from a course
+	/**
+	 * Removes the specified dish from the course in the menu.
+	 * @param menuName the name of the menu.
+	 * @param courseName the name of the course.
+	 * @param dish the name of the dish to be removed.
+	 */
 	private void removeDishFromCourse(String menuName, String courseName, String dish) {
 		menus.get(menuName).get(courseName).remove(dish);
 		if (menus.get(menuName).get(courseName).isEmpty()) {
@@ -356,7 +394,10 @@ public class MenuTab extends HBox {
 		}
 	}
 
-	// Adds a new course to the specified menu
+	/**
+	 * Adds a new course to the specified menu.
+	 * @param menuName the name of the menu.
+	 */
 	private void addCourseToMenu(String menuName) {
 		TextInputDialog dialog = new TextInputDialog();
 		dialog.setTitle("Add New Course");
@@ -373,7 +414,9 @@ public class MenuTab extends HBox {
 	}
 
 
-	// Adds a new menu
+	/**
+	 * Adds a new menu to the list of menus.
+	 */
 	private void addNewMenu() {
 		TextInputDialog dialog = new TextInputDialog();
 		dialog.setTitle("Add New Menu");
@@ -395,6 +438,11 @@ public class MenuTab extends HBox {
 		});
 	}
 
+	/**
+	 * Shows an alert dialog with the specified title and content.
+	 * @param title the title of the alert
+	 * @param content the content of the alert
+	 */
 	private void showAlert(String title, String content) {
 		Alert alert = new Alert(Alert.AlertType.WARNING);
 		alert.setTitle(title);
@@ -403,7 +451,10 @@ public class MenuTab extends HBox {
 		alert.showAndWait();
 	}
 
-	// Update dish description when a dish is selected
+	/**
+	 * Updates the dish description section with the details of the selected dish.
+	 * @param dish the name of the selected dish
+	 */
 	private void updateDishDescriptionSection(String dish) {
 		// TODO: Fetch the actual details of the dish from your data source.
 		String dishDetails = String.format(
@@ -416,10 +467,10 @@ public class MenuTab extends HBox {
 		dishDescriptionTextArea.setText(dishDetails);
 	}
 
-
-
-
-	// Create the Menu Description Section
+	/**
+	 * Creates the menu description section.
+	 * @return the VBox containing the menu description section.
+	 */
 	private VBox createMenuDescriptionSection() {
 		VBox section = new VBox(5);
 		section.setPadding(new Insets(10));
@@ -427,10 +478,9 @@ public class MenuTab extends HBox {
 		return section;
 	}
 
-	// Create the Dish Description Section
-
-
-	// Open the current menu in a new window
+	/**
+	 * Opens the menu details in a new window.
+	 */
 	private void openMenuInNewWindow() {
 		// Create a new stage (window)
 		Stage stage = new Stage();
@@ -448,8 +498,4 @@ public class MenuTab extends HBox {
 		// Show the new stage
 		stage.show();
 	}
-
-
-// ... rest of the MenuTab class
-
 }

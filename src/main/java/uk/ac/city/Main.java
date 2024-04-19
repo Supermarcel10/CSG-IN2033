@@ -23,6 +23,9 @@ import java.io.File;
 import java.util.LinkedHashMap;
 
 
+/**
+ * The main class of the application. This class is responsible for creating the main window and setting up the tabs.
+ */
 public class Main extends Application {
 	private static final String version = getProjectVersion();
 	private static final Image logo = ResourceLoader.getImageResource(PredefinedResources.LOGO);
@@ -31,6 +34,10 @@ public class Main extends Application {
 	protected static int sizeX = 800; // TODO: Make this dynamic
 	protected static int sizeY = 600; // TODO: Make this dynamic
 
+	/**
+	 * The entry point of the application.
+	 * @param primaryStage The primary stage of the application.
+	 */
 	@Override
 	public void start(Stage primaryStage) {
 		Pane topBar = createTopBar();
@@ -50,6 +57,10 @@ public class Main extends Application {
 		primaryStage.show();
 	}
 
+	/**
+	 * Creates the top bar of the application responsible for displaying the logo and the version of the application.
+	 * @return The top bar of the application.
+	 */
 	private Pane createTopBar() {
 		Pane topBar = new Pane();
 		topBar.setStyle("-fx-background-color: #2b3336;");
@@ -71,6 +82,10 @@ public class Main extends Application {
 		return topBar;
 	}
 
+	/**
+	 * Creates the tab pane of the application responsible for displaying the different tabs.
+	 * @return The tab pane of the application.
+	 */
 	private TabPane createTabPane() {
 		TabPane tabPane = new TabPane();
 		tabPane.setTabClosingPolicy(TabPane.TabClosingPolicy.UNAVAILABLE);
@@ -92,6 +107,10 @@ public class Main extends Application {
 		return tabPane;
 	}
 
+	/**
+	 * Retrieves the version of the project from the pom.xml file.
+	 * @return The version of the project.
+	 */
 	private static String getProjectVersion() {
 		try {
 			SAXReader reader = new SAXReader();
@@ -104,6 +123,10 @@ public class Main extends Application {
 		}
 	}
 
+	/**
+	 * The entry point of the application.
+	 * @param args The command line arguments.
+	 */
 	public static void main(String[] args) {
 		Database.initiateDB();
 		launch();

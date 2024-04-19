@@ -16,9 +16,15 @@ import uk.ac.city.database.entities.Ingredient;
 import java.util.stream.Collectors;
 
 
+/**
+ * The StockTab class is a custom JavaFX component that represents the Stock tab in the main application window.
+ */
 public class StockTab extends HBox {
 	ListView<String> categoryList;
 
+	/**
+	 * Creates a new StockTab object.
+	 */
 	public StockTab() {
 		this.setSpacing(10);
 		this.setPadding(new Insets(10));
@@ -32,6 +38,10 @@ public class StockTab extends HBox {
 		this.getChildren().addAll(selectCategorySection, ingredientListSection, statusSection, wasteSection);
 	}
 
+	/**
+	 * Creates a VBox containing the waste section of the Stock tab.
+	 * @return A VBox containing the waste section of the Stock tab.
+	 */
 	private VBox createWasteSection() {
 		VBox box = new VBox(5);
 		box.setPadding(new Insets(10));
@@ -46,6 +56,10 @@ public class StockTab extends HBox {
 		return box;
 	}
 
+	/**
+	 * Creates a VBox containing the status section of the Stock tab.
+	 * @return A VBox containing the status section of the Stock tab.
+	 */
 	private VBox createStatusSection() {
 		VBox box = new VBox(5);
 		box.setPadding(new Insets(10));
@@ -59,6 +73,10 @@ public class StockTab extends HBox {
 		return box;
 	}
 
+	/**
+	 * Creates a VBox containing the ingredient list section of the Stock tab.
+	 * @return A VBox containing the ingredient list section of the Stock tab.
+	 */
 	private VBox createIngredientListSection() {
 		VBox box = new VBox(5);
 		box.setPadding(new Insets(10));
@@ -85,6 +103,10 @@ public class StockTab extends HBox {
 		return box;
 	}
 
+	/**
+	 * Creates a VBox containing the select category section of the Stock tab.
+	 * @return A VBox containing the select category section of the Stock tab.
+	 */
 	private VBox createSelectCategorySection() {
 		// Create a list of categories
 		categoryList = new ListView<>();
@@ -112,6 +134,10 @@ public class StockTab extends HBox {
 		return box;
 	}
 
+	/**
+	 * Handles the action when the "Add Ingredient" button is clicked.
+	 * @param ingredientList The list of ingredients.
+	 */
 	private void handleAddIngredientButton(ListView<String> ingredientList) {
 		String ingredientName = Popup.showTextInputPopup("Enter the name of the new ingredient");
 		if (ingredientName == null || ingredientName.isEmpty()) {
@@ -126,6 +152,10 @@ public class StockTab extends HBox {
 		}
 	}
 
+	/**
+	 * Handles the action when the "Add Category" button is clicked.
+	 * @param categoryList The list of categories.
+	 */
 	private void handleAddCategoryButton(ListView<String> categoryList) {
 		String categoryName = Popup.showTextInputPopup("Enter the name of the new category");
 		if (categoryName == null || categoryName.isEmpty()) {
@@ -138,6 +168,10 @@ public class StockTab extends HBox {
 		}
 	}
 
+	/**
+	 * Handles the action when the "Remove Category" button is clicked.
+	 * @param categoryList The list of categories.
+	 */
 	private void handleRemoveCategoryButton(ListView<String> categoryList) {
 		String selectedCategory = categoryList.getSelectionModel().getSelectedItem();
 		if (selectedCategory == null) {

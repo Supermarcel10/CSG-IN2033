@@ -25,10 +25,18 @@ import java.nio.file.Paths;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 
+/**
+ * A utility class to display popups with different types of messages and buttons.
+ */
 public class Popup {
 	private static final int popupTextSize = 22;
 	private static final int buttonFontSize = 14;
 
+	/**
+	 * Display a blocking popup with a message and YES/NO buttons.
+	 * @param prompt The message to display in the popup.
+	 * @return True if the YES button was clicked, false if the NO button was clicked.
+	 */
 	public static boolean showYesNoPopup(String prompt) {
 		AtomicBoolean result = new AtomicBoolean(false);
 		Stage popupStage = new Stage();
@@ -75,6 +83,10 @@ public class Popup {
 		return result.get();
 	}
 
+	/**
+	 * Display a blocking popup with a message and an OK button.
+	 * @param prompt The message to display in the popup.
+	 */
 	public static void showOkPopup(String prompt) {
 		Stage popupStage = new Stage();
 		popupStage.initModality(Modality.APPLICATION_MODAL);
@@ -108,6 +120,11 @@ public class Popup {
 		popupStage.showAndWait();
 	}
 
+	/**
+	 * Display a blocking popup with a message and an input text field.
+	 * @param prompt The message to display in the popup.
+	 * @return The text entered by the user in the text field.
+	 */
 	public static String showTextInputPopup(String prompt) {
 		Stage popupStage = new Stage();
 		popupStage.initModality(Modality.APPLICATION_MODAL);
@@ -147,6 +164,11 @@ public class Popup {
 		return textField.getText();
 	}
 
+	/**
+	 * Display a blocking popup with a message and a warning icon.
+	 * @param title The title of the popup.
+	 * @param message The message to display in the popup.
+	 */
 	public static void showWarningPopup(String title, String message) {
 		Stage popupStage = new Stage();
 		popupStage.initModality(Modality.APPLICATION_MODAL);
@@ -185,14 +207,5 @@ public class Popup {
 		scene.setFill(Color.TRANSPARENT);
 		popupStage.setScene(scene);
 		popupStage.showAndWait();
-	}
-
-	private static String readSVGContent(String svgImagePath) {
-		try {
-			return new String(Files.readAllBytes(Paths.get(svgImagePath)));
-		} catch (IOException e) {
-			e.printStackTrace();
-			return "";
-		}
 	}
 }
