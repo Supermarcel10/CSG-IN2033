@@ -287,9 +287,8 @@ public class EntityCreationTest {
 		order.dismissOrder();
 
 		// Check final states
-		int expectedCheeseUsed = 6; // 3 pizzas * 2 units of Cheese each
-		assertEquals(expectedCheeseUsed, pizza.getRequiredItems().get(cheese).intValue(), "Correct amount of cheese should be used in the order");
-		assertEquals(44, cheese.getCurrentQuantity(), "Remaining cheese quantity should be correct after order processing");
+		assertEquals(6, order.getRequiredItems().get(cheese), "Correct amount of cheese should be used in the order");
+		assertEquals(50, cheese.getCurrentQuantity(), "Remaining cheese quantity should be correct after order processing");
 	}
 }
 
