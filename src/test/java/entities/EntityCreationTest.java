@@ -1,8 +1,8 @@
 package entities;
 
+import org.junit.jupiter.api.BeforeAll;
 import uk.ac.city.database.Database;
 import uk.ac.city.database.entities.*;
-
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import org.junit.jupiter.api.Test;
@@ -15,10 +15,13 @@ import static org.junit.jupiter.api.Assertions.*;
 
 
 public class EntityCreationTest {
+	@BeforeAll
+	public static void setUp() {
+		Database.initiateDB();
+	}
+
 	@Test
 	public void testIngredientCreation() {
-		Database.initiateDB();
-
 		Category baking = new Category("Baking");
 
 		// Create ingredients
@@ -89,13 +92,11 @@ public class EntityCreationTest {
 		flour.setCurrentQuantity(0);
 		Exception exception = assertThrows(IllegalArgumentException.class, () -> flour.decreaseQuantity(1),
 			"Decreasing quantity below zero should throw IllegalArgumentException");
-		assertEquals("Cannot decrease quantity below 0!", exception.getMessage());
+		assertEquals("Cannot decrease Flour quantity below 0!", exception.getMessage());
 	}
 
 	@Test
 	public void testDishCreation() {
-		Database.initiateDB();
-
 		// Create categories
 		Category baking = new Category("Baking");
 		Category vegetables = new Category("Vegetables");
@@ -148,8 +149,6 @@ public class EntityCreationTest {
 
 	@Test
 	public void testOrderCreation() {
-		Database.initiateDB();
-
 		// Categories
 		Category baking = new Category("Baking");
 		Category vegetables = new Category("Vegetables");
@@ -257,12 +256,8 @@ public class EntityCreationTest {
 
 		ExecutorService service = Executors.newFixedThreadPool(10);
 		for (int i = 0; i < 100; i++) {
-			service.submit(() -> {
-				flour.increaseQuantity(1);
-			});
-			service.submit(() -> {
-				flour.decreaseQuantity(1);
-			});
+			service.submit(() -> flour.increaseQuantity(1));
+			service.submit(() -> flour.decreaseQuantity(1));
 		}
 
 		service.shutdown();
@@ -273,7 +268,7 @@ public class EntityCreationTest {
 	}
 
 	@Test
-	public void testCompleteOrderProcess() {
+	public void testDismissedOrder() {
 		// Create Categories and Ingredients
 		Category dairy = new Category("Dairy");
 		Ingredient cheese = new Ingredient("Cheese", dairy);
@@ -288,8 +283,8 @@ public class EntityCreationTest {
 		orderItems.put(pizza, 3); // Order 3 Pizzas
 		Order order = new Order(LocalDateTime.now(), 1, orderItems);
 
-		// Process the order (simulate)
-		order.dismissOrder(); // Simulate the completion of the order
+		// Dismiss the order
+		order.dismissOrder();
 
 		// Check final states
 		int expectedCheeseUsed = 6; // 3 pizzas * 2 units of Cheese each
